@@ -1,0 +1,21 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.sovereignx1.jquizzer.mainmenu.MainMenuController"
+      fx:id="mRoot"
+      alignment="CENTER"
+      spacing="10">
+
+    <Label text="Select an option"/>
+
+    <Separator visible="false" prefHeight="33" />
+
+    <Button text="New" onAction="#newDialog" styleClass="largeButton"/>
+    <Button text="Load" onAction="#loadDialog" styleClass="largeButton"/>
+    <Button text="Options" onAction="#optionDialog" styleClass="largeButton"/>
+    <Button text="Exit" onAction="#exitDialog" styleClass="largeButton"/>
+
+</VBox>

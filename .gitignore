@@ -42,3 +42,5 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/prod/
+/prod/corretto-1.8.0_422/

@@ -1,0 +1,11 @@
+.root {
+    -fx-font-size : 15pt;
+    -fx-background-color: powderblue;
+}
+
+.largeButton {
+  text-align: center;
+  color: red;
+  height: 33px;
+  width: 200px;
+}
