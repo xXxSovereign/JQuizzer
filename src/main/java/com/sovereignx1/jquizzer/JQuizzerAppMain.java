@@ -2,9 +2,10 @@ package com.sovereignx1.jquizzer;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.sovereignx1.jquizzer.logger.ILogger;
+import com.sovereignx1.jquizzer.util.appctx.ApplicationContext;
+import com.sovereignx1.jquizzer.util.logger.ILogger;
 //import com.sovereignx1.jquizzer.logger.LoggerImpl;
-import com.sovereignx1.jquizzer.logger.LoggerManager;
+import com.sovereignx1.jquizzer.util.logger.LoggerManager;
 import com.sovereignx1.jquizzer.util.ExitManager;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -17,15 +18,24 @@ import javafx.stage.WindowEvent;
 
 import java.util.Objects;
 
+/**
+ * Main application class for JQuizzer
+ *
+ * This class handles setting up the JavaFX environment and FXMLLoader.
+ * Additionally, this class will start all services
+ */
 public class JQuizzerAppMain extends Application {
 
     private static final ILogger sLog = LoggerManager.getLogger();
+
     public static Stage mStage;
 
     @Override
     public void start(Stage primaryStage) {
         try {
             sLog.info("starting up");
+
+            ApplicationContext.initialize();
 
 
             //LoggerImpl test;
@@ -61,7 +71,7 @@ public class JQuizzerAppMain extends Application {
 
         } catch (Exception e) {
             // Need to implement passing variable amts of string (String ...)
-            // sLog.error("Error encountered in initializing XAppManager", e);
+            sLog.error("Error encountered in initializing JQuizzer", e.toString());
         }
     }
 

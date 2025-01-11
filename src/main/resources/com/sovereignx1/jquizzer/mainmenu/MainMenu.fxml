@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Separator?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.sovereignx1.jquizzer.mainmenu.MainMenuController"
+      fx:controller="com.sovereignx1.jquizzer.ui.mainmenu.MainMenuController"
       fx:id="mRoot"
       alignment="CENTER"
       spacing="10">

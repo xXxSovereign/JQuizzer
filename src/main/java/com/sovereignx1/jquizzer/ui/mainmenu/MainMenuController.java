@@ -1,8 +1,8 @@
-package com.sovereignx1.jquizzer.mainmenu;
+package com.sovereignx1.jquizzer.ui.mainmenu;
 
 import com.sovereignx1.jquizzer.JQuizzerAppMain;
-import com.sovereignx1.jquizzer.logger.ILogger;
-import com.sovereignx1.jquizzer.logger.LoggerManager;
+import com.sovereignx1.jquizzer.util.logger.ILogger;
+import com.sovereignx1.jquizzer.util.logger.LoggerManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -10,25 +10,30 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.VBox;
 
 public class MainMenuController {
+
     @FXML
     private VBox mRoot;
 
     private final ILogger mLog = LoggerManager.getLogger();
 
+
     @FXML
     private void newDialog(){
-        mLog.info("executing new");
+        mLog.info("executing substitution test {} {} {} ------", "LOL", "LMAO", "LMFAO");
+        mLog.info("executing new {} ------:", "test", "test23");
+        mLog.info("yoooo", "error lol", "extra values");
+        mLog.info("yooo {}");
 
     }
 
     @FXML
-    private void loadDialog(){
+    private void loadDialog() {
         mLog.info("executing load");
 
     }
 
     @FXML
-    private void optionDialog(){
+    private void optionDialog() {
         mLog.info("executing options");
 
     }

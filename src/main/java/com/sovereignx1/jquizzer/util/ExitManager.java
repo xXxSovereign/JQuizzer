@@ -1,7 +1,7 @@
 package com.sovereignx1.jquizzer.util;
 
-import com.sovereignx1.jquizzer.logger.LoggerManager;
-import com.sovereignx1.jquizzer.logger.ILogger;
+import com.sovereignx1.jquizzer.util.logger.LoggerManager;
+import com.sovereignx1.jquizzer.util.logger.ILogger;
 
 import java.util.ArrayList;
 import java.util.List;

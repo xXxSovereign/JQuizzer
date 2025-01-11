@@ -22,8 +22,11 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
+    // 1/10/25 I don't remember if this still applies, need to evaluate
     // Guice TODO: SEE IF THIS (AND SLF4J ABOVE) WORKS IF I REMOVE FAT JAR (COMMENTED OUT CODE) (MAY NEED TO ACTUALLY USE GUICE FOR IT TO FAIL FYI, i.e. implement module class)
     implementation 'com.google.inject:guice:7.0.0'
+
+    implementation 'com.google.code.gson:gson:2.11.0'
 
     implementation 'commons-io:commons-io:2.18.0'
 }

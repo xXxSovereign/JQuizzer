@@ -1,4 +1,4 @@
-package com.sovereignx1.jquizzer.logger;
+package com.sovereignx1.jquizzer.util.logger;
 
 import com.sovereignx1.jquizzer.util.ExitManager;
 import com.sovereignx1.jquizzer.util.IClosable;
@@ -9,7 +9,7 @@ public class LoggerManager implements IClosable {
 
     private static LoggerImpl LOGGER = null;
 
-    private static final String LOG_FILE = "JQuizzerLog.txt";
+    private static final String LOG_FILE = "JQuizzerLog.txt"; // TODO: Load this from application context
 
     public static ILogger getLogger() {
         if (LOGGER == null){
