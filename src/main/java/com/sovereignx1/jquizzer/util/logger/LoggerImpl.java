@@ -23,8 +23,6 @@ class LoggerImpl implements ILogger {
     private static TeeOutputStream sErrAndFileStream;
     private static PrintStream sOut;
 
-    // TODO: !! Need to implement passing the error in as
-
     @Override
     public void verbose(String pFormat, String... pValues) {
         log(ELogLevel.VERBOSE, pFormat, pValues);
