@@ -73,11 +73,6 @@ class LoggerImpl implements ILogger {
         }
     }
 
-    @Override
-    public void setDebug(boolean pDebugEnabled) {
-        DEBUG_ON = pDebugEnabled;
-    }
-
     private void log(ELogLevel pLvl, String pFormat, String ... pValues){
 
         if (pLvl.compareTo(LOG_LEVEL) >= 0) {
