@@ -39,6 +39,6 @@ public interface ILogger {
      */
     void error(String pStr, Exception pEx);
 
-    void setup(String pPath);
+    void setup();
 
 }

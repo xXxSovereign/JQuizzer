@@ -9,12 +9,11 @@ public class LoggerManager implements IClosable {
 
     private static LoggerImpl LOGGER = null;
 
-    private static final String LOG_FILE = "JQuizzerLog.txt"; // TODO: Load this from application context
 
     public static ILogger getLogger() {
         if (LOGGER == null){
             LOGGER = new LoggerImpl();
-            LOGGER.setup(LOG_FILE);
+            LOGGER.setup();
             ExitManager.registerAsLast(LoggerManager.class);
         }
         return LOGGER;
@@ -23,6 +22,7 @@ public class LoggerManager implements IClosable {
 
     /**
      * Implemented from IClosable but needs to be static; called via reflection from ExitManager
+     * TODO: Maybe find a better way to handle this?
      */
     @SuppressWarnings("unused")
     public static void close() throws IOException {

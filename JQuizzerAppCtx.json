@@ -1,5 +1,6 @@
 {
   "debug_level": "info",
   "extra_debug_info": "true",
+  "debug_file": "JQuizzerLog.txt",
   "test_extra_val": "TESTTT"
 }

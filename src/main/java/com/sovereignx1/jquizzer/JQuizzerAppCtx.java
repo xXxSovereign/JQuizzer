@@ -7,6 +7,7 @@ public class JQuizzerAppCtx implements IAppCtx {
 
     private String debug_level;
     private boolean extra_debug_info;
+    private String debug_file;
     private String test_extra_val;
 
     /**
@@ -25,6 +26,11 @@ public class JQuizzerAppCtx implements IAppCtx {
     @Override
     public boolean getDebugMode() {
         return extra_debug_info;
+    }
+
+    @Override
+    public String getDebugFile() {
+        return debug_file;
     }
 
     public String getExtraVal(){

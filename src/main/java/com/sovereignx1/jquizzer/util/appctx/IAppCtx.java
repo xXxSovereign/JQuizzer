@@ -7,6 +7,9 @@ package com.sovereignx1.jquizzer.util.appctx;
  */
 public interface IAppCtx {
 
+    // TODO: Do we need to add the json field variables here? They would be forced to be public though...
+
     String getDebugLvl();
     boolean getDebugMode();
+    String getDebugFile();
 }

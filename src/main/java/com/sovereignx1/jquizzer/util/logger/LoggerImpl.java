@@ -54,16 +54,15 @@ class LoggerImpl implements ILogger {
     }
 
     @Override
-    public void setup(String pPath) {
+    public void setup() {
         try {
-            File logFile = new File(pPath);
-
-            sErrAndFileStream = new TeeOutputStream(System.err, Files.newOutputStream(logFile.toPath()));
-            sOut = new PrintStream(sErrAndFileStream);
-
             IAppCtx ctx = ApplicationContext.getAppCtx();
             DEBUG_ON = ctx.getDebugMode();
             LOG_LEVEL = ELogLevel.valueOf(ctx.getDebugLvl().toUpperCase());
+            File logFile = new File(ctx.getDebugFile());
+
+            sErrAndFileStream = new TeeOutputStream(System.err, Files.newOutputStream(logFile.toPath()));
+            sOut = new PrintStream(sErrAndFileStream);
 
         } catch (Exception e) {
             ExitManager.exit("ERROR: FAILED TO INITIALIZE LOG FILE - " + e);
