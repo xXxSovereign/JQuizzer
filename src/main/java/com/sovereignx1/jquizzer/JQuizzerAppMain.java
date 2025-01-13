@@ -46,6 +46,11 @@ public class JQuizzerAppMain extends Application {
 
             loader.setControllerFactory(injector::getInstance);
 
+            JQuizzerAppCtx ctx = ApplicationContext.getAppCtx();
+            System.out.println(ctx.getDebugMode());
+            System.out.println(ctx.getDebugLvl());
+            System.out.println(ctx.getExtraVal());
+
             // load root
             Parent root = loader.load();
 
@@ -69,7 +74,6 @@ public class JQuizzerAppMain extends Application {
 
 
         } catch (Exception e) {
-            // Need to implement passing variable amts of string (String ...)
             sLog.error("Error encountered in initializing JQuizzer: ", e);
         }
     }

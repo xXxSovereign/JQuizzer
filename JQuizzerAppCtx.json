@@ -1,4 +1,5 @@
 {
   "debug_level": "info",
-  "extra_debug_info": "true"
+  "extra_debug_info": "true",
+  "test_extra_val": "TESTTT"
 }

@@ -1,8 +1,8 @@
 package com.sovereignx1.jquizzer.util.logger;
 
-import com.sovereignx1.jquizzer.JQuizzerAppCtx;
 import com.sovereignx1.jquizzer.util.ExitManager;
 import com.sovereignx1.jquizzer.util.appctx.ApplicationContext;
+import com.sovereignx1.jquizzer.util.appctx.IAppCtx;
 import org.apache.commons.io.output.TeeOutputStream;
 
 import java.io.File;
@@ -61,10 +61,9 @@ class LoggerImpl implements ILogger {
             sErrAndFileStream = new TeeOutputStream(System.err, Files.newOutputStream(logFile.toPath()));
             sOut = new PrintStream(sErrAndFileStream);
 
-            JQuizzerAppCtx ctx = ApplicationContext.getAppCtx();
-            DEBUG_ON = ctx.extra_debug_info;
-            LOG_LEVEL = ELogLevel.valueOf(ctx.debug_level.toUpperCase());
-
+            IAppCtx ctx = ApplicationContext.getAppCtx();
+            DEBUG_ON = ctx.getDebugMode();
+            LOG_LEVEL = ELogLevel.valueOf(ctx.getDebugLvl().toUpperCase());
 
         } catch (Exception e) {
             ExitManager.exit("ERROR: FAILED TO INITIALIZE LOG FILE - " + e);

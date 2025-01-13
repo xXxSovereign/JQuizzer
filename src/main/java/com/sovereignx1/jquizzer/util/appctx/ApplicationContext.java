@@ -20,11 +20,11 @@ public class ApplicationContext {
 
     private static boolean isInit = false;
 
-    private static Class<?> mAppCtxClass;
+    private static Class<? extends IAppCtx> mAppCtxClass;
 
     private static Object mAppCtxObj;
 
-    public static <T> void initialize(Class<T> pAppCtxClass, String pAppCtxFile) {
+    public static void initialize(Class<? extends IAppCtx> pAppCtxClass, String pAppCtxFile) {
 
         if (!isInit) {
             mAppCtxClass = pAppCtxClass;
@@ -56,9 +56,12 @@ public class ApplicationContext {
      *
      * @return An object of the App Context Model
      * @param <T> Application Model Class
+     *
+     * Suppressing Unchecked, as the object will always be of the type mAppCtxClass. This is due to how mAppCtxObj is
+     *           instantiated above in initialize()
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getAppCtx() {
+    public static <T extends IAppCtx> T getAppCtx() {
         return (T) mAppCtxClass.cast(mAppCtxObj);
     }
 }
