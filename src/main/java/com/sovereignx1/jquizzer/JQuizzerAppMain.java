@@ -38,11 +38,6 @@ public class JQuizzerAppMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            JQuizzerAppCtx ctx = ApplicationContext.getAppCtx();
-
-            System.out.println(ctx.debug_level);
-            System.out.println(ctx.extra_debug_info);
-
             mStage = primaryStage;
 
             // Load the FXML file and set a Guice Injector to create controller classes (for DI)
@@ -75,7 +70,7 @@ public class JQuizzerAppMain extends Application {
 
         } catch (Exception e) {
             // Need to implement passing variable amts of string (String ...)
-            sLog.error("Error encountered in initializing JQuizzer", e.getMessage());
+            sLog.error("Error encountered in initializing JQuizzer: ", e);
         }
     }
 

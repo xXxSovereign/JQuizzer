@@ -1,7 +1,5 @@
 package com.sovereignx1.jquizzer.util.logger;
 
-import java.nio.file.Path;
-
 public interface ILogger {
 
     /**
@@ -34,12 +32,13 @@ public interface ILogger {
      */
     void error(String pFormat, String ... pValues);
 
+    /**
+     * Version of error logging but just for a message and error info
+     * @param pStr Message to log
+     * @param pEx Exception to get info from
+     */
+    void error(String pStr, Exception pEx);
+
     void setup(String pPath);
 
-    /**
-     * Sets the debug flag in the underlying logger. This will add extra class details to the logging output
-     *
-     * @param pDebugEnabled whether to enable Debug
-     */
-    void setDebug(boolean pDebugEnabled);
 }

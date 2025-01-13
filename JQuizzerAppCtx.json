@@ -1,4 +1,4 @@
 {
-  "debug_level": "debug",
+  "debug_level": "info",
   "extra_debug_info": "true"
 }

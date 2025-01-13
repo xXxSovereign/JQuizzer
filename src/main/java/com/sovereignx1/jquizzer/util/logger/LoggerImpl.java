@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 class LoggerImpl implements ILogger {
 
@@ -21,6 +23,7 @@ class LoggerImpl implements ILogger {
     private static TeeOutputStream sErrAndFileStream;
     private static PrintStream sOut;
 
+    // TODO: !! Need to implement passing the error in as
 
     @Override
     public void verbose(String pFormat, String... pValues) {
@@ -45,6 +48,11 @@ class LoggerImpl implements ILogger {
     @Override
     public void error(String pFormat, String ... pValues) {
         log(ELogLevel.ERROR, pFormat, pValues);
+    }
+
+    public void error(String pStr, Exception pEx) {
+        log(ELogLevel.ERROR, pStr, pEx.getMessage());
+        pEx.printStackTrace(sOut);
     }
 
     @Override
@@ -77,7 +85,7 @@ class LoggerImpl implements ILogger {
             String formattedStr = braceReplace(pFormat, pValues);
 
             // LogLvl: log_info (debug info, class and caller class
-            sOut.println(pLvl + ": " + formattedStr + (DEBUG_ON ? " (" + debug_info + ")" : ""));
+            sOut.println(Timestamp.from(Instant.now()) + " " + pLvl + ": " + formattedStr + (DEBUG_ON ? " (" + debug_info + ")" : ""));
         }
     }
 
