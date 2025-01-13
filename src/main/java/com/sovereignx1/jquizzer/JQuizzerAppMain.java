@@ -20,25 +20,29 @@ import java.util.Objects;
 
 /**
  * Main application class for JQuizzer
- *
+ * <p>
  * This class handles setting up the JavaFX environment and FXMLLoader.
  * Additionally, this class will start all services
  */
 public class JQuizzerAppMain extends Application {
 
-    private static final ILogger sLog = LoggerManager.getLogger();
-
+    private static final ILogger sLog;
     public static Stage mStage;
+
+    static {
+        ApplicationContext.initialize(JQuizzerAppCtx.class, "JQuizzerAppCtx.json");
+        sLog = LoggerManager.getLogger();
+    }
+
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            sLog.info("starting up");
+            JQuizzerAppCtx ctx = ApplicationContext.getAppCtx();
 
-            ApplicationContext.initialize();
+            System.out.println(ctx.debug_level);
+            System.out.println(ctx.extra_debug_info);
 
-
-            //LoggerImpl test;
             mStage = primaryStage;
 
             // Load the FXML file and set a Guice Injector to create controller classes (for DI)
@@ -71,7 +75,7 @@ public class JQuizzerAppMain extends Application {
 
         } catch (Exception e) {
             // Need to implement passing variable amts of string (String ...)
-            sLog.error("Error encountered in initializing JQuizzer", e.toString());
+            sLog.error("Error encountered in initializing JQuizzer", e.getMessage());
         }
     }
 
@@ -82,7 +86,7 @@ public class JQuizzerAppMain extends Application {
             Parent pane = FXMLLoader.load(Objects.requireNonNull(JQuizzerAppMain.class.getResource(fxml)));
             mStage.getScene().setRoot(pane);
         } catch (Exception e) {
-            sLog.error("OOPS CHANGING SCENE MESS UP !!! " + e.getMessage());
+            sLog.error("OOPS CHANGING SCENE MESS UP !!! " + e);
         }
 
 

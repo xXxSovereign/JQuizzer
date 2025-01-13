@@ -1,6 +1,8 @@
 package com.sovereignx1.jquizzer.util.logger;
 
+import com.sovereignx1.jquizzer.JQuizzerAppCtx;
 import com.sovereignx1.jquizzer.util.ExitManager;
+import com.sovereignx1.jquizzer.util.appctx.ApplicationContext;
 import org.apache.commons.io.output.TeeOutputStream;
 
 import java.io.File;
@@ -9,8 +11,12 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 
 class LoggerImpl implements ILogger {
-    private static boolean DEBUG_ON = true; // TODO: change this to false before production build (OBE by below)
-                                            // TODO: need to also implement loading this from a config file
+
+    // This value is loaded from app ctx
+    private static boolean DEBUG_ON;
+
+    // This value is loaded from app ctx
+    private static ELogLevel LOG_LEVEL;
 
     private static TeeOutputStream sErrAndFileStream;
     private static PrintStream sOut;
@@ -48,6 +54,12 @@ class LoggerImpl implements ILogger {
 
             sErrAndFileStream = new TeeOutputStream(System.err, Files.newOutputStream(logFile.toPath()));
             sOut = new PrintStream(sErrAndFileStream);
+
+            JQuizzerAppCtx ctx = ApplicationContext.getAppCtx();
+            DEBUG_ON = ctx.extra_debug_info;
+            LOG_LEVEL = ELogLevel.valueOf(ctx.debug_level.toUpperCase());
+
+
         } catch (Exception e) {
             ExitManager.exit("ERROR: FAILED TO INITIALIZE LOG FILE - " + e);
         }
@@ -59,11 +71,14 @@ class LoggerImpl implements ILogger {
     }
 
     private void log(ELogLevel pLvl, String pFormat, String ... pValues){
-        String debug_info = checkStackTrace();
-        String formattedStr = braceReplace(pFormat, pValues);
 
-        // LogLvl: log_info (debug info, class and caller class
-        sOut.println(pLvl + ": " + formattedStr + (DEBUG_ON ? " (" + debug_info + ")" : ""));
+        if (pLvl.compareTo(LOG_LEVEL) >= 0) {
+            String debug_info = checkStackTrace();
+            String formattedStr = braceReplace(pFormat, pValues);
+
+            // LogLvl: log_info (debug info, class and caller class
+            sOut.println(pLvl + ": " + formattedStr + (DEBUG_ON ? " (" + debug_info + ")" : ""));
+        }
     }
 
     /**
@@ -87,14 +102,12 @@ class LoggerImpl implements ILogger {
      *  12 - 8 = 4 / 2 = 2 curly brace pair
      */
     private String braceReplace(String pFormat, String ... pValues) {
-        String res = "";
+        // Prepare result to be formatted. If no values are placed then the placeholders will not be filled
+        String res = pFormat;
         int countVals = pValues.length;
 
         // Count how many {} are present by difference in characters when they are removed
         int substituteCount = (pFormat.length() - pFormat.replace("{}", "").length()) / "{}".length();
-
-        // Prepare result to be formatted. If no values are placed then the placeholders will not be filled
-        res = pFormat;
 
         // If no placeholders, add everything to the end
         if (substituteCount == 0 && countVals > 0) {
