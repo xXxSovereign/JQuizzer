@@ -44,3 +44,4 @@ bin/
 .DS_Store
 /prod/
 /prod/corretto-1.8.0_422/
+/JQuizzerLog.txt

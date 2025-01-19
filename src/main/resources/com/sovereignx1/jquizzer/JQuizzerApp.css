@@ -1,11 +1,135 @@
+/* General styles for the root container */
+
+/* chatgpt made this shit, tf ? prob copied it from somewhere tbh */
+
 .root {
-    -fx-font-size : 15pt;
-    -fx-background-color: powderblue;
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: #e0e0e0;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 18px;
 }
 
-.largeButton {
-  text-align: center;
-  color: red;
-  height: 33px;
-  width: 200px;
+/* Button styles */
+.button {
+    -fx-background-color: #3c3f41, #2b2b2b;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 5, 4;
+    -fx-text-fill: #e0e0e0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 3, 0.5, 0, 1);
+    -fx-padding: 5 10;
+}
+
+.button:hover {
+    -fx-background-color: #116fad, #3c3f41;
+    -fx-text-fill: #ffffff;
+}
+
+.button:pressed {
+    -fx-background-color: #2b2b2b, #1c1c1c;
+    -fx-effect: none;
+}
+
+/* Label styles */
+.label {
+    -fx-text-fill: #e0e0e0;
+}
+
+/* TextField styles */
+.text-field {
+    -fx-background-color: #3c3f41, #2b2b2b;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 5, 4;
+    -fx-text-fill: #e0e0e0;
+    -fx-padding: 5;
+}
+
+.text-field:focused {
+    -fx-background-color: #4a4d4f, #3c3f41;
+    -fx-border-color: #116fad;
+    -fx-border-width: 2;
+}
+
+/* TextArea styles */
+.text-area {
+    -fx-control-inner-background: #3c3f41;
+    -fx-text-fill: #e0e0e0;
+    -fx-border-color: transparent;
+}
+
+.text-area:focused {
+    -fx-border-color: #116fad;
+}
+
+/* TableView styles */
+.table-view {
+    -fx-background-color: #2b2b2b;
+    -fx-table-cell-border-color: #3c3f41;
+    -fx-padding: 5;
+}
+
+.table-view .column-header {
+    -fx-background-color: #3c3f41;
+    -fx-text-fill: #e0e0e0;
+    -fx-border-color: #116fad;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #e0e0e0;
+}
+
+/* ScrollBar styles */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #116fad;
+    -fx-background-radius: 5;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #589df6;
+}
+
+/* ComboBox styles */
+.combo-box {
+    -fx-background-color: #3c3f41;
+    -fx-text-fill: #e0e0e0;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #3c3f41;
+    -fx-text-fill: #e0e0e0;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #116fad;
+    -fx-text-fill: #ffffff;
+}
+
+/* Tooltip styles */
+.tooltip {
+    -fx-background-color: #4a4d4f;
+    -fx-text-fill: #e0e0e0;
+    -fx-border-color: #116fad;
+}
+
+/* ProgressBar styles */
+.progress-bar {
+    -fx-accent: #116fad;
+    -fx-background-color: #3c3f41;
+}
+
+/* TabPane styles */
+.tab-pane {
+    -fx-background-color: #2b2b2b;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #3c3f41;
+    -fx-text-base-color: #e0e0e0;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #116fad;
 }
