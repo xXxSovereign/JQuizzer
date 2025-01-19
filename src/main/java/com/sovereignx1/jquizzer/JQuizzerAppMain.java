@@ -95,6 +95,10 @@ public class JQuizzerAppMain extends Application {
 
     }
 
+    public static void changeScene(Scene pScene){
+        mStage.setScene(pScene);
+    }
+
     public static void exit(){
 
         sLog.info("exiting gracefully...");

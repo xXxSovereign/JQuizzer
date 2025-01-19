@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -11,8 +8,31 @@
       fx:controller="com.sovereignx1.jquizzer.ui.mainmenu.NewQuizzerDialogController"
       prefHeight="400.0" prefWidth="600.0" spacing="7" alignment="CENTER" stylesheets="@../../JQuizzerApp.css">
 
+    <fx:define>
+        <ToggleGroup fx:id="mToggleGroup"/>
+    </fx:define>
 
-    <Label text="This that new dialog shi man"/>
-    <Button text="Close" onAction="#closePopup"/>
+    <Label text="Please configure some settings for the new Quiz Set"/>
+
+    <Separator visible="false" prefHeight="33" />
+
+    <HBox alignment="CENTER">
+        <Label text="Quiz Name: " styleClass="static-small-title"/>
+        <TextField fx:id="mNameField" />
+    </HBox>
+
+    <Separator visible="false" prefHeight="10" />
+    <Label text="Select type of Quiz" styleClass="static-small-title" />
+    <HBox alignment="CENTER">
+        <HBox spacing="1">
+            <RadioButton text="Flash Cards" toggleGroup="$mToggleGroup"/>
+        </HBox>
+
+        <HBox spacing="1">
+            <RadioButton text="Quizzer" toggleGroup="$mToggleGroup"/>
+        </HBox>
+    </HBox>
+
+    <Button text="Submit" onAction="#submitAction"/>
 
 </VBox>

@@ -90,6 +90,64 @@
     -fx-transition: all 0.3s ease-in-out; /* Smooth transition */
 }
 
+.label.static-small-title {
+    -fx-font-size: 18px; /* Font size similar to the small title */
+    -fx-font-weight: bold; /* Bold font */
+    -fx-text-fill: #1a84cc; /* Static blue color (adjust this to your preferred shade of blue) */
+    -fx-padding: 5 10; /* Padding around the text */
+    -fx-cursor: default; /* No hand cursor (since it's not interactive) */
+    -fx-effect: null; /* Remove any shadow or other effects */
+}
+
+/* RadioButton styles */
+.radio-button {
+    -fx-font-size: 16px; /* Standard font size */
+    -fx-font-weight: bold; /* Bold font */
+    -fx-text-fill: white; /* White text */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-padding: 5 10; /* Padding around text */
+    -fx-cursor: hand; /* Cursor indicates it's clickable */
+    -fx-border-color: transparent; /* No border */
+    -fx-border-width: 0;
+}
+
+/* RadioButton selected state */
+.radio-button:selected {
+    -fx-text-fill: linear-gradient(#1a84cc, #4e9dd6); /* Gradient text for selected state */
+}
+
+/* RadioButton when hovered */
+.radio-button:hover {
+    -fx-background-color: rgba(17, 111, 173, 0.2); /* Subtle background change on hover */
+    -fx-transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
+/* RadioButton in a disabled state */
+.radio-button:disabled {
+    -fx-opacity: 0.5; /* Slightly dimmed when disabled */
+    -fx-text-fill: gray; /* Gray text for disabled state */
+}
+
+/* RadioButton indicator style (the circle) */
+.radio-button .radio-mark {
+    -fx-background-color: #116fad; /* Secondary color for the radio button circle */
+    -fx-background-insets: 0, 1; /* Ensuring no inner shadow */
+    -fx-pref-width: 20px; /* Size of the radio circle */
+    -fx-pref-height: 20px; /* Size of the radio circle */
+    -fx-border-color: transparent; /* No border for the circle */
+    -fx-border-width: 0; /* No border for the circle */
+}
+
+/* RadioButton selected state indicator (the filled circle) */
+.radio-button:selected .radio-mark {
+   -fx-background-color: linear-gradient(#1a84cc, #4e9dd6); /* Match the selected state gradient */
+}
+
+/* RadioButton focus (when clicked but not selected) */
+.radio-button:focused {
+  /*  -fx-background-color: rgba(17, 111, 173, 0.3); /* Slight background change on focus */
+}
+
 /* TextField styles */
 .text-field {
     -fx-background-color: #3c3f41, #2b2b2b;

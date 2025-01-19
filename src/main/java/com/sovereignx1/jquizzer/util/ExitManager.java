@@ -13,6 +13,8 @@ public final class ExitManager {
      */
     private static final List<Class<? extends IClosable>> sToClose = new ArrayList<>();
 
+    private static final List<Thread> sThreadsToClose = new ArrayList<>();
+
     private static Class<? extends IClosable> sLastToClose;
 
     private static final ILogger sLog = LoggerManager.getLogger();
@@ -42,6 +44,11 @@ public final class ExitManager {
             }
         }
 
+        for (Thread thread : sThreadsToClose) {
+            // The individual thread can catch the InterruptException and close its resources appropriately
+            thread.interrupt();
+        }
+
         try {
             if (sLastToClose != null) {
                 sLastToClose.getMethod("close").invoke(sLastToClose);
@@ -55,10 +62,19 @@ public final class ExitManager {
     /**
      * Register a class to close when the application exits
      *
-     * @param clazz Service to close
+     * @param pClazz Service to close
      */
-    public static void register(Class<? extends IClosable> clazz){
-        sToClose.add(clazz);
+    public static void register(Class<? extends IClosable> pClazz){
+        sToClose.add(pClazz);
+    }
+
+    /**
+     * Register a Thread to interrupt when the application exits
+     *
+     * @param pThread Service to close
+     */
+    public static void register(Thread pThread){
+        sThreadsToClose.add(pThread);
     }
 
     /**

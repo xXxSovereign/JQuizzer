@@ -1,6 +1,7 @@
 package com.sovereignx1.jquizzer.ui.mainmenu;
 
 import com.sovereignx1.jquizzer.JQuizzerAppMain;
+import com.sovereignx1.jquizzer.util.ExitManager;
 import com.sovereignx1.jquizzer.util.logger.ILogger;
 import com.sovereignx1.jquizzer.util.logger.LoggerManager;
 import javafx.css.PseudoClass;
@@ -36,7 +37,8 @@ public class MainMenuController {
 
         // Spawn a new simple thread to flash the title every few seconds
         Thread titleBlinker = new Thread(() -> {
-            Random r = new Random();
+            // See below
+            //Random r = new Random();
             try {
                 for (long i = 0; i < Long.MAX_VALUE; i++) {
                     // Do I really need changing flashing rate lmao
@@ -49,12 +51,15 @@ public class MainMenuController {
                 }
 
             } catch (InterruptedException e) {
-                mLog.warn("The Title Flashing was interrupted, oh well lol");
+                mLog.debug("MainMenuTitleBlinker has been interrupted, usually due to application exit");
             }
         });
 
         titleBlinker.setDaemon(true);
         titleBlinker.start();
+        // Register this thread to die when we exit
+        ExitManager.register(titleBlinker);
+
 
     }
 
@@ -68,7 +73,7 @@ public class MainMenuController {
             // Create the popup stage
             Stage popupStage = new Stage();
             popupStage.initModality(Modality.APPLICATION_MODAL); // Block interaction with other windows
-            popupStage.setTitle("Popup Window");
+            popupStage.setTitle("New Quizzer Dialog");
 
             Scene popupScene = new Scene(popupRoot);
             popupStage.setScene(popupScene);
