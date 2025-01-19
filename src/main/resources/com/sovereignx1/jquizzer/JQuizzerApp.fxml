@@ -12,6 +12,6 @@
             fx:id="mRoot"
             prefHeight="600" prefWidth="400" alignment="CENTER" stylesheets="@JQuizzerApp.css">
 
-    <fx:include source="mainmenu/MainMenu.fxml" />
+    <fx:include source="ui/mainmenu/MainMenu.fxml" />
 
 </VBox>

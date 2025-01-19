@@ -53,7 +53,7 @@ public final class ExitManager {
     }
 
     /**
-     * Register a class to close when JQuizzer exits
+     * Register a class to close when the application exits
      *
      * @param clazz Service to close
      */
@@ -62,9 +62,8 @@ public final class ExitManager {
     }
 
     /**
-     * Register a service to close after every other class. Normally a logger should close last
-     *
-     * @param clazz Class to close last
+     * This method is for internal use only to the XUtils tools. Calling this method will have no effect on closing
+     * as this will always be called first by the logger impl
      */
     public static void registerAsLast(Class<? extends IClosable> clazz){
         if (sLastToClose == null){

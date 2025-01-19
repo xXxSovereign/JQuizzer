@@ -85,12 +85,12 @@ class LoggerImpl implements ILogger {
      * <p>
      * i.e. braceReplace("Test {} test2 {}", 6, "LOL") = "Test 6 test2 LOL"
      * <p>
-     * If there is a mismatch in the number of braces and values, an error will be thrown.
-     * However, if there are no braces present, the values will be added to the end of the format string, separated
-     * by spaces
+     * This will replace any brace pairs with a value if supplied. If braces are present without enough values,
+     * they will remain a brace. If there are more values than braces, the extra are added onto the end of the
+     * string
      *
      * @param pFormat Format string with the brace placeholders
-     * @param pValues n number of values to replace, must match the number of braces
+     * @param pValues n number of values to replace
      *
      * @return The format with the filled in values from pValues
      * <p>
@@ -116,6 +116,7 @@ class LoggerImpl implements ILogger {
             return res;
         }
 
+        // If we have more values than braces, fill braces and put values at the end
         if (countVals >= substituteCount) {
             boolean extraVals = countVals > substituteCount;
             int mainIter;
@@ -127,13 +128,19 @@ class LoggerImpl implements ILogger {
                     res += " " + pValues[j];
                 }
             }
+
+        // At this point if we have values, we have fewer values that braces so fill what we can and leave the rest
+        } else if (countVals > 0) {
+            for (String pValue : pValues) {
+                res = res.replaceFirst("\\{\\}", pValue);
+            }
         }
         return res;
     }
 
     public static void close() throws IOException {
         // Manually log as info to ensure this is not eaten by a log level limiter
-        sOut.println("INFO: Closing Logger Print Stream and Error/File Stream");
+        sOut.println(Timestamp.from(Instant.now()) + " " + "INFO: Closing Logger Print Stream and Error/File Stream");
         sOut.println("\n===============================END OF JQUIZZER RUNTIME===============================\n");
         sOut.flush();
         sErrAndFileStream.flush();
