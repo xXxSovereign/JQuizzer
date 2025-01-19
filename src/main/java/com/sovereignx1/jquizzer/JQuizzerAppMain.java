@@ -60,6 +60,10 @@ public class JQuizzerAppMain extends Application {
             // Set up the stage
             mStage.setTitle("JQuizzer");
             mStage.setScene(scene);
+
+            // Im not a good enough dev yet to allow this
+            // once im good with layout managers frfr ong no cap this can be unlocked
+            mStage.setResizable(false);
             mStage.show();
 
             // Clean all threads on exit

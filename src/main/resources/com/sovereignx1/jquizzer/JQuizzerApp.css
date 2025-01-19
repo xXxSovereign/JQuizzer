@@ -31,7 +31,63 @@
 
 /* Label styles */
 .label {
-    -fx-text-fill: #e0e0e0;
+    -fx-text-fill: #ffffff; /* White text */
+    -fx-font-size: 14px; /* Default font size */
+    -fx-font-weight: normal; /* Normal font weight */
+    -fx-background-color: transparent; /* No background */
+    -fx-text-alignment: left; /* Left align text */
+    -fx-padding: 5 10; /* Padding around text */
+    -fx-cursor: default; /* Non-clickable cursor */
+    -fx-effect: dropshadow(gaussian, #116fad, 5, 0.0, 0.0, 2); /* More visible outline effect */
+}
+
+/* Hover effect for labels with visible text outline */
+.label:hover {
+    -fx-text-fill: #ffffff; /* White text */
+    -fx-effect: dropshadow(gaussian, #58a6dc, 5, 0.0, 0.0, 3); /* Brighter and thicker outline on hover */
+    -fx-transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
+/* Title Label styles */
+.label.title {
+    -fx-text-fill: linear-gradient(#1a84cc, #4e9dd6); /* Slightly brighter gradient */
+    -fx-font-size: 36px; /* Larger font size */
+    -fx-font-weight: bold; /* Bold font */
+    -fx-padding: 10 0; /* Extra spacing */
+    -fx-effect: dropshadow(gaussian, rgba(17, 111, 173, 0.3), 5, 0.3, 0, 2); /* Softer shadow */
+    -fx-background-color: transparent; /* No background */
+    -fx-text-alignment: center; /* Center align text */
+    -fx-border-color: transparent; /* No border */
+    -fx-border-width: 0; /* No border width */
+    -fx-cursor: default; /* Non-clickable cursor */
+    -fx-letter-spacing: 50px; /* Increased letter spacing */
+}
+
+/* Title hover effect */
+.label.title:hover {
+    -fx-text-fill: linear-gradient(#4e9dd6, #1a84cc); /* Softer reversed gradient */
+    -fx-effect: dropshadow(gaussian, rgba(88, 166, 220, 0.6), 10, 0.6, 0, 4); /* Softer glow effect */
+    -fx-transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
+/* Smaller Title Label styles */
+.label.small-title {
+    -fx-text-fill: linear-gradient(#1a84cc, #4e9dd6); /* Same gradient as the title */
+    -fx-font-size: 18px; /* Smaller font size */
+    -fx-font-weight: bold; /* Bold font */
+    -fx-padding: 5 0; /* Less padding */
+    -fx-background-color: transparent; /* No background */
+    -fx-text-alignment: center; /* Center align text */
+    -fx-border-color: transparent; /* No border */
+    -fx-border-width: 0; /* No border width */
+    -fx-cursor: default; /* Non-clickable cursor */
+}
+
+/* Smaller Title hover effect */
+.label.small-title:hover {
+    -fx-text-fill: linear-gradient(#4e9dd6, #1a84cc); /* Reverse gradient */
+    -fx-effect: none; /* No shadow effect on hover */
+    -fx-transition: all 0.3s ease-in-out; /* Smooth transition */
 }
 
 /* TextField styles */

@@ -9,6 +9,13 @@
       alignment="CENTER"
       spacing="10">
 
+    <VBox alignment="CENTER" spacing="1">
+        <Label fx:id="mTitleLbl" styleClass="title" text="J Q U I Z Z E R"/>
+        <Label text="        by Michael Adolph" styleClass="small-title"/>
+    </VBox>
+
+
+    <Separator visible="false" prefHeight="100" />
     <Label text="Select an option"/>
 
     <Separator visible="false" prefHeight="33" />
