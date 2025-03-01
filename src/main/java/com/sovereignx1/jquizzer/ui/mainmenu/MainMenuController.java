@@ -17,8 +17,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.util.Random;
-
 public class MainMenuController {
 
     @FXML
@@ -26,7 +24,8 @@ public class MainMenuController {
 
     @FXML
     private Label mTitleLbl;
-    private final long mTitleFlashRateMillis = 100;
+
+    private static final long TITLE_FLASH_RATE_MILLIS = 100;
 
     private final ILogger mLog = LoggerManager.getLogger();
 
@@ -37,19 +36,13 @@ public class MainMenuController {
 
         // Spawn a new simple thread to flash the title every few seconds
         Thread titleBlinker = new Thread(() -> {
-            // See below
-            //Random r = new Random();
             try {
                 for (long i = 0; i < Long.MAX_VALUE; i++) {
-                    // Do I really need changing flashing rate lmao
-                    // mTitleFlashRateMillis += r.nextInt(15) * (r.nextBoolean() ? -1 : 1);
-                    //  mLog.verbose("Flash rate: " + mTitleFlashRateMillis);
-                    Thread.sleep(mTitleFlashRateMillis);
+                    Thread.sleep(TITLE_FLASH_RATE_MILLIS);
                     mTitleLbl.pseudoClassStateChanged(PseudoClass.getPseudoClass("hover"), true);
-                    Thread.sleep(mTitleFlashRateMillis/4);
+                    Thread.sleep(TITLE_FLASH_RATE_MILLIS/4);
                     mTitleLbl.pseudoClassStateChanged(PseudoClass.getPseudoClass("hover"), false);
                 }
-
             } catch (InterruptedException e) {
                 mLog.debug("MainMenuTitleBlinker has been interrupted, usually due to application exit");
             }
@@ -102,6 +95,7 @@ public class MainMenuController {
         mLog.info("executing exit dialog");
 
         // TODO: Overhaul this gay ass exit dialog with a custom FXML that does the same stuff. should be ez
+        // Related to above, maybe make a cool generic Alert/Confirmation Dialog factory, might be useful tbh
 
         // Build small alert popup, and if confirmed exit application
         Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION);

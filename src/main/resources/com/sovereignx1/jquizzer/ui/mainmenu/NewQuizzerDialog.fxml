@@ -23,13 +23,16 @@
 
     <Separator visible="false" prefHeight="10" />
     <Label text="Select type of Quiz" styleClass="static-small-title" />
-    <HBox alignment="CENTER">
+
+    <!-- Setup radio buttons. Internal state assumes flashcards = true, and a normal quiz=false. Flash cards are like
+    a "special" state. -->
+    <HBox alignment="CENTER" maxWidth="250" fx:id="mRadioButtonBox">
         <HBox spacing="1">
-            <RadioButton text="Flash Cards" toggleGroup="$mToggleGroup"/>
+            <RadioButton text="Flash Cards" toggleGroup="$mToggleGroup" userData="true"/>
         </HBox>
 
         <HBox spacing="1">
-            <RadioButton text="Quizzer" toggleGroup="$mToggleGroup"/>
+            <RadioButton text="Quizzer" toggleGroup="$mToggleGroup" userData="false"/>
         </HBox>
     </HBox>
 

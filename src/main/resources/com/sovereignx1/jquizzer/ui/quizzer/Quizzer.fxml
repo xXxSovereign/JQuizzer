@@ -9,9 +9,16 @@
 <VBox xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.sovereignx1.jquizzer.ui.quizzer.QuizzerController"
-            prefHeight="400.0" prefWidth="600.0" alignment="CENTER" stylesheets="@../../JQuizzerApp.css">
+      fx:id="mQuizzerRoot"
+            prefHeight="400.0" prefWidth="600.0" alignment="TOP_CENTER" stylesheets="@../../JQuizzerApp.css">
 
     <Label text="quiz shit" />
     <Label text="This is where we will do flash cards or quiz based off of what was loaded or specified" />
+
+    <Separator visible="false" />
+
+    <ScrollPane fx:id="mTestPane" prefHeight="${mQuizzerRoot.height}" >
+        <VBox fx:id="mHistory"  prefWidth="${mTestPane.width}" />
+    </ScrollPane>
 
 </VBox>
