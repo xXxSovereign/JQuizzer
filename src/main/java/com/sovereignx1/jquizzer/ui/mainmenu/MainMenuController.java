@@ -29,12 +29,12 @@ public class MainMenuController {
 
     private final ILogger mLog = LoggerManager.getLogger();
 
-    private static final String NEW_DIALOG_FXML = "NewQuizzerDialog.fxml";
+    private static final String NEW_DIALOG_FXML = "newquiz/NewQuizzerDialog.fxml";
 
     @FXML
     private void initialize(){
 
-        // Spawn a new simple thread to flash the title every few seconds
+        // Spawn a new simple thread to flash the title like a neon sign
         Thread titleBlinker = new Thread(() -> {
             try {
                 for (long i = 0; i < Long.MAX_VALUE; i++) {
@@ -50,6 +50,7 @@ public class MainMenuController {
 
         titleBlinker.setDaemon(true);
         titleBlinker.start();
+
         // Register this thread to die when we exit
         ExitManager.register(titleBlinker);
 

@@ -5,8 +5,9 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.sovereignx1.jquizzer.ui.mainmenu.NewQuizzerDialogController"
-      prefHeight="400.0" prefWidth="600.0" spacing="7" alignment="CENTER" stylesheets="@../../JQuizzerApp.css">
+      fx:id="mNewDialogRoot"
+      fx:controller="com.sovereignx1.jquizzer.ui.mainmenu.newquiz.NewQuizzerDialogController"
+      prefHeight="400.0" prefWidth="600.0" spacing="10" alignment="CENTER" stylesheets="@../../../JQuizzerApp.css">
 
     <fx:define>
         <ToggleGroup fx:id="mToggleGroup"/>
@@ -26,7 +27,7 @@
 
     <!-- Setup radio buttons. Internal state assumes flashcards = true, and a normal quiz=false. Flash cards are like
     a "special" state. -->
-    <HBox alignment="CENTER" maxWidth="250" fx:id="mRadioButtonBox">
+    <HBox alignment="CENTER" maxWidth="250" fx:id="mRadioButtonBox" spacing="5">
         <HBox spacing="1">
             <RadioButton text="Flash Cards" toggleGroup="$mToggleGroup" userData="true"/>
         </HBox>
@@ -36,6 +37,6 @@
         </HBox>
     </HBox>
 
-    <Button text="Submit" onAction="#submitAction"/>
+    <Button text="Create Questions" onAction="#submitAction"/>
 
 </VBox>

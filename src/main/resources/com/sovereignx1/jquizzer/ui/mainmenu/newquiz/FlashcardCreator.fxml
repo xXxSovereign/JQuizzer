@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.sovereignx1.jquizzer.ui.mainmenu.newquiz.FlashcardCreatorController"
+      prefHeight="400.0" prefWidth="600.0" alignment="CENTER">
+
+    <padding>
+        <Insets top="5" bottom="10"/>
+    </padding>
+
+    <Label fx:id="mFlashcardTitle"/>
+
+    <Separator/>
+
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints percentWidth="70"/>
+            <ColumnConstraints percentWidth="30"/>
+        </columnConstraints>
+
+        <VBox GridPane.columnIndex="0">
+            <VBox>
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="Front Text"/>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label text="Flashcard List"/>
+                </HBox>
+                <TextArea fx:id="mFrontTextArea" wrapText="true" prefRowCount="4"/>
+            </VBox>
+            <VBox>
+                <Label text="Back Text"/>
+                <TextArea fx:id="mBackTextArea" wrapText="true" prefRowCount="4"/>
+            </VBox>
+        </VBox>
+
+        <ScrollPane fx:id="mFlashcardScrollPane" GridPane.columnIndex="1">
+            <VBox fx:id="mFlashcardScrollPaneContents"/>
+        </ScrollPane>
+    </GridPane>
+
+    <Separator/>
+
+    <Button fx:id="mAddBtn" text="Add" onAction="#onAdd"/>
+    <Button fx:id="mSubmitBtn" text="Submit" onAction="#submit" />
+
+</VBox>

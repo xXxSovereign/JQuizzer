@@ -16,6 +16,26 @@
     -fx-border-radius: 4px;
 }
 
+/* Custom Separator Style */
+.separator {
+    -fx-background-color: transparent; /* Remove background */
+    -fx-padding: 5 0; /* Adjust spacing above/below */
+}
+
+/* Horizontal Separator Line */
+.separator:horizontal .line {
+    -fx-border-color: linear-gradient(to right, #0d1f2d, #1a1a1a, #0d1f2d); /* Darker edges, smooth center */
+    -fx-border-width: 1.5px; /* Subtle thickness */
+    -fx-effect: dropshadow(gaussian, rgba(17, 111, 173, 0.6), 5, 0.5, 0, 0); /* Softer blue glow */
+}
+
+/* Vertical Separator Line */
+.separator:vertical .line {
+    -fx-border-color: linear-gradient(to bottom, #0d1f2d, #1a1a1a, #0d1f2d); /* Darker edges, smooth center */
+    -fx-border-width: 1.5px; /* Subtle thickness */
+    -fx-effect: dropshadow(gaussian, rgba(17, 111, 173, 0.6), 5, 0.5, 0, 0); /* Softer blue glow */
+}
+
 /* Button styles */
 .button {
     -fx-background-color: #3c3f41, #2b2b2b;
@@ -150,42 +170,48 @@
    -fx-background-color: linear-gradient(#1a84cc, #4e9dd6); /* Match the selected state gradient */
 }
 
-/* RadioButton focus (when clicked but not selected) */
-.radio-button:focused {
-  /*  -fx-background-color: rgba(17, 111, 173, 0.3); /* Slight background change on focus */
-}
-
 /* ScrollPane Background */
 .scroll-pane {
-    -fx-background: #2f2f2f; /* Match dark theme background color */
-    -fx-border-color: transparent; /* No border for a clean look */
-    -fx-padding: 5; /* Add some padding around the content */
+    -fx-background: #2f2f2f; /* Dark theme background */
+    -fx-border-color: #116fad; /* Blue accent border */
 }
 
 /* ScrollPane Viewport */
 .scroll-pane .viewport {
-    -fx-background-color: #2f2f2f; /* Dark theme background for the content */
-    -fx-padding: 5; /* Padding within the viewport */
+    -fx-background-color: #2f2f2f; /* Dark theme background */
+}
+
+/* ScrollBar styles */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #116fad;
+    -fx-background-radius: 5;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #589df6;
 }
 
 /* ScrollBar Track */
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track {
-    -fx-background-color: #3b3b3b; /* Slightly lighter dark gray for the track */
+    -fx-background-color: #3b3b3b; /* Dark gray for the track */
 }
 
 /* ScrollBar Thumb */
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color: #116fad; /* Secondary accent color for the thumb */
-    -fx-background-radius: 5; /* Rounded corners for a modern look */
-    -fx-padding: 2; /* Padding for better sizing */
+    -fx-background-color: #116fad; /* Blue accent thumb */
+    -fx-background-radius: 5;
 }
 
-/* ScrollBar Hover Effect */
+/* Hover Effect for ScrollBar Thumb */
 .scroll-bar:horizontal .thumb:hover,
 .scroll-bar:vertical .thumb:hover {
-    -fx-background-color: #4e9dd6; /* Slightly brighter blue on hover */
+    -fx-background-color: #4e9dd6; /* Slightly brighter blue */
 }
 
 /* ScrollBar Buttons (arrows, if visible) */
@@ -201,7 +227,6 @@
 .scroll-bar:horizontal .decrement-arrow,
 .scroll-bar:vertical .increment-arrow,
 .scroll-bar:vertical .decrement-arrow {
-    -fx-shape: "M0,0 L4,4 L8,0 Z"; /* Arrow shape */
     -fx-background-color: #116fad; /* Secondary accent color */
 }
 
@@ -220,7 +245,8 @@
     -fx-border-width: 2;
 }
 
-/* TextField error pseudo class, this is used in scenarios such as no user input, etc. */
+/* TextField error pseudo class, this is used in scenarios such as no user input, etc.
+For some reason, Intellij flags this pseudo class as an error. However, it works. So suck it. */
 .text-field:error {
     -fx-border-color: red;
     -fx-border-width: 2px;
@@ -230,8 +256,10 @@
 /* TextArea styles */
 .text-area {
     -fx-control-inner-background: #3c3f41;
-    -fx-text-fill: #e0e0e0;
-    -fx-border-color: transparent;
+    -fx-background-color: #2f2f2f; /* Match dark theme */
+    -fx-border-color: #3b3b3b; /* Match the background instead of white */
+    -fx-text-fill: white; /* White text */
+    -fx-padding: 2;
 }
 
 .text-area:focused {
@@ -253,20 +281,6 @@
 
 .table-view .column-header .label {
     -fx-text-fill: #e0e0e0;
-}
-
-/* ScrollBar styles */
-.scroll-bar {
-    -fx-background-color: transparent;
-}
-
-.scroll-bar .thumb {
-    -fx-background-color: #116fad;
-    -fx-background-radius: 5;
-}
-
-.scroll-bar .thumb:hover {
-    -fx-background-color: #589df6;
 }
 
 /* ComboBox styles */

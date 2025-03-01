@@ -38,6 +38,7 @@ public class ApplicationContext {
 
             Gson gson = new Gson();
 
+            // construct app ctx obj through gson via reflection
             mAppCtxObj = gson.fromJson(ctxContents, pAppCtxClass);
 
             isInit = true;

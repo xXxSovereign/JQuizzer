@@ -5,6 +5,7 @@ import com.sovereignx1.jquizzer.util.appctx.IAppCtx;
 
 public class JQuizzerAppCtx implements IAppCtx {
 
+    // These names must match the fields in JQuizzerAppCtx.json, or the program will not load
     private String debug_level;
     private boolean extra_debug_info;
     private String debug_file;
@@ -15,7 +16,8 @@ public class JQuizzerAppCtx implements IAppCtx {
      * {@link ApplicationContext}
      */
     private JQuizzerAppCtx(){
-
+        // no impl, constructed through Gson via reflection
+        // see com.sovereignx1.jquizzer.util.appctx.ApplicationContext
     }
 
     @Override

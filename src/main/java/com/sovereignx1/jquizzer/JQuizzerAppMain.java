@@ -46,11 +46,6 @@ public class JQuizzerAppMain extends Application {
 
             loader.setControllerFactory(injector::getInstance);
 
-            JQuizzerAppCtx ctx = ApplicationContext.getAppCtx();
-            System.out.println(ctx.getDebugMode());
-            System.out.println(ctx.getDebugLvl());
-            System.out.println(ctx.getExtraVal());
-
             // load root
             Parent root = loader.load();
 
