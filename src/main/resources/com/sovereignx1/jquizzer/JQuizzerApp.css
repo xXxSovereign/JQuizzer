@@ -58,7 +58,7 @@
 
 /* Label styles */
 .label {
-    -fx-text-fill: #ffffff; /* White text */
+    -fx-text-fill: #1a84cc; /* White text */
     -fx-font-size: 14px; /* Default font size */
     -fx-font-weight: normal; /* Normal font weight */
     -fx-background-color: transparent; /* No background */
@@ -68,10 +68,17 @@
     -fx-effect: dropshadow(gaussian, #116fad, 5, 0.0, 0.0, 2); /* More visible outline effect */
 }
 
+/* Custom selected label style class, see use in FlashcardDataLabel and FlashcardCreatorController */
+.label.selected {
+    -fx-text-fill: #ffffff; /* White text */
+    -fx-effect: dropshadow(gaussian, #58a6dc, 5, 0.0, 0.0, 2); /* Brighter and thicker outline on hover */
+    -fx-transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
 /* Hover effect for labels with visible text outline */
 .label:hover {
-    -fx-text-fill: #ffffff; /* White text */
-    -fx-effect: dropshadow(gaussian, #58a6dc, 5, 0.0, 0.0, 3); /* Brighter and thicker outline on hover */
+    -fx-text-fill: #00acf3; /* White text */
+    -fx-effect: dropshadow(gaussian, #58a6dc, 5, 0.0, 0.0, 2); /* Brighter and thicker outline on hover */
     -fx-transition: all 0.3s ease-in-out; /* Smooth transition */
 }
 
@@ -167,7 +174,7 @@
 
 /* RadioButton selected state indicator (the filled circle) */
 .radio-button:selected .radio-mark {
-   -fx-background-color: linear-gradient(#1a84cc, #4e9dd6); /* Match the selected state gradient */
+    -fx-background-color: linear-gradient(#1a84cc, #4e9dd6); /* Match the selected state gradient */
 }
 
 /* ScrollPane Background */

@@ -32,7 +32,7 @@ public class MainMenuController {
     private static final String NEW_DIALOG_FXML = "newquiz/NewQuizzerDialog.fxml";
 
     @FXML
-    private void initialize(){
+    private void initialize() {
 
         // Spawn a new simple thread to flash the title like a neon sign
         Thread titleBlinker = new Thread(() -> {
@@ -40,7 +40,7 @@ public class MainMenuController {
                 for (long i = 0; i < Long.MAX_VALUE; i++) {
                     Thread.sleep(TITLE_FLASH_RATE_MILLIS);
                     mTitleLbl.pseudoClassStateChanged(PseudoClass.getPseudoClass("hover"), true);
-                    Thread.sleep(TITLE_FLASH_RATE_MILLIS/4);
+                    Thread.sleep(TITLE_FLASH_RATE_MILLIS / 4);
                     mTitleLbl.pseudoClassStateChanged(PseudoClass.getPseudoClass("hover"), false);
                 }
             } catch (InterruptedException e) {
@@ -70,6 +70,8 @@ public class MainMenuController {
             popupStage.setTitle("New Quizzer Dialog");
 
             Scene popupScene = new Scene(popupRoot);
+            popupStage.setMinHeight(500);
+            popupStage.setMinWidth(600);
             popupStage.setScene(popupScene);
             popupStage.show();
         } catch (Exception e) {

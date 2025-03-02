@@ -1,0 +1,5 @@
+This file serves as a store for the common color codes used in this app.
+
+Standard Background Color: #2b2b2b
+Blue labels: #1a84cc
+Hover Blue Text: #00acf3, such as for hovered labels

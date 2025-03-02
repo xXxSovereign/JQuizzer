@@ -29,22 +29,22 @@ class LoggerImpl implements ILogger {
     }
 
     @Override
-    public void debug(String pFormat, String ... pValues) {
+    public void debug(String pFormat, String... pValues) {
         log(ELogLevel.DEBUG, pFormat, pValues);
     }
 
     @Override
-    public void info(String pFormat, String ... pValues) {
+    public void info(String pFormat, String... pValues) {
         log(ELogLevel.INFO, pFormat, pValues);
     }
 
     @Override
-    public void warn(String pFormat, String ... pValues) {
+    public void warn(String pFormat, String... pValues) {
         log(ELogLevel.WARN, pFormat, pValues);
     }
 
     @Override
-    public void error(String pFormat, String ... pValues) {
+    public void error(String pFormat, String... pValues) {
         log(ELogLevel.ERROR, pFormat, pValues);
     }
 
@@ -69,14 +69,15 @@ class LoggerImpl implements ILogger {
         }
     }
 
-    private void log(ELogLevel pLvl, String pFormat, String ... pValues){
+    private void log(ELogLevel pLvl, String pFormat, String... pValues) {
 
         if (pLvl.compareTo(LOG_LEVEL) >= 0) {
             String debug_info = checkStackTrace();
             String formattedStr = braceReplace(pFormat, pValues);
 
             // LogLvl: log_info (debug info, class and caller class
-            sOut.println(Timestamp.from(Instant.now()) + " " + pLvl + ": " + formattedStr + (DEBUG_ON ? " (" + debug_info + ")" : ""));
+            sOut.println(Timestamp.from(Instant.now()) + " " + pLvl + ": " + formattedStr +
+                         (DEBUG_ON ? " (" + debug_info + ")" : ""));
         }
     }
 
@@ -85,22 +86,19 @@ class LoggerImpl implements ILogger {
      * <p>
      * i.e. braceReplace("Test {} test2 {}", 6, "LOL") = "Test 6 test2 LOL"
      * <p>
-     * This will replace any brace pairs with a value if supplied. If braces are present without enough values,
-     * they will remain a brace. If there are more values than braces, the extra are added onto the end of the
-     * string
+     * This will replace any brace pairs with a value if supplied. If braces are present without enough values, they
+     * will remain a brace. If there are more values than braces, the extra are added onto the end of the string
      *
      * @param pFormat Format string with the brace placeholders
      * @param pValues n number of values to replace
-     *
      * @return The format with the filled in values from pValues
      * <p>
-     *
-     *  "0123{}67{}89".length = 12
-     *  "01236789".length = 8
-     *
-     *  12 - 8 = 4 / 2 = 2 curly brace pair
+     * <p>
+     * "0123{}67{}89".length = 12 "01236789".length = 8
+     * <p>
+     * 12 - 8 = 4 / 2 = 2 curly brace pair
      */
-    private String braceReplace(String pFormat, String ... pValues) {
+    private String braceReplace(String pFormat, String... pValues) {
         // Prepare result to be formatted. If no values are placed then the placeholders will not be filled
         String res = pFormat;
         int countVals = pValues.length;
@@ -120,16 +118,15 @@ class LoggerImpl implements ILogger {
         if (countVals >= substituteCount) {
             boolean extraVals = countVals > substituteCount;
             int mainIter;
-            for (mainIter = 0; mainIter < substituteCount; mainIter++){
+            for (mainIter = 0; mainIter < substituteCount; mainIter++) {
                 res = res.replaceFirst("\\{\\}", pValues[mainIter]);
             }
             if (extraVals) {
-                for (int j = mainIter; j < countVals; j++){
+                for (int j = mainIter; j < countVals; j++) {
                     res += " " + pValues[j];
                 }
             }
-
-        // At this point if we have values, we have fewer values that braces so fill what we can and leave the rest
+            // At this point if we have values, we have fewer values that braces so fill what we can and leave the rest
         } else if (countVals > 0) {
             for (String pValue : pValues) {
                 res = res.replaceFirst("\\{\\}", pValue);
@@ -158,9 +155,9 @@ class LoggerImpl implements ILogger {
 
             StackTraceElement caller = stackTrace[4];
             return caller.getClassName();
-        } return "";
+        }
+        return "";
     }
-
 
 
 }

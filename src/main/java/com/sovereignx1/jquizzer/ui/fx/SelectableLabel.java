@@ -4,7 +4,11 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
+import java.util.Objects;
+
 public class SelectableLabel extends Label {
+
+    protected String mName;
 
     /**
      * @param pName Text for this label to display
@@ -12,6 +16,12 @@ public class SelectableLabel extends Label {
      */
     public SelectableLabel(String pName, EventHandler<? super MouseEvent> pControllerCallback) {
         super(pName);
+        mName = pName;
         setOnMouseClicked(pControllerCallback);
+    }
+
+    public void setName(String pName) {
+        mName = Objects.requireNonNull(pName);
+        setText(mName);
     }
 }

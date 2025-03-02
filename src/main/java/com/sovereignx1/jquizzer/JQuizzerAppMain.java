@@ -2,11 +2,10 @@ package com.sovereignx1.jquizzer;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.sovereignx1.jquizzer.util.ExitManager;
 import com.sovereignx1.jquizzer.util.appctx.ApplicationContext;
 import com.sovereignx1.jquizzer.util.logger.ILogger;
-//import com.sovereignx1.jquizzer.logger.LoggerImpl;
 import com.sovereignx1.jquizzer.util.logger.LoggerManager;
-import com.sovereignx1.jquizzer.util.ExitManager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -21,8 +20,8 @@ import java.util.Objects;
 /**
  * Main application class for JQuizzer
  * <p>
- * This class handles setting up the JavaFX environment and FXMLLoader.
- * Additionally, this class will start all services
+ * This class handles setting up the JavaFX environment and FXMLLoader. Additionally, this class will start all
+ * services
  */
 public class JQuizzerAppMain extends Application {
 
@@ -54,6 +53,7 @@ public class JQuizzerAppMain extends Application {
 
             // Set up the stage
             mStage.setTitle("JQuizzer");
+
             mStage.setScene(scene);
 
             // Im not a good enough dev yet to allow this
@@ -79,7 +79,7 @@ public class JQuizzerAppMain extends Application {
 
     // Utility Methods
 
-    public static void changeScene(String fxml){
+    public static void changeScene(String fxml) {
         try {
             Parent pane = FXMLLoader.load(Objects.requireNonNull(JQuizzerAppMain.class.getResource(fxml)));
             mStage.getScene().setRoot(pane);
@@ -90,11 +90,11 @@ public class JQuizzerAppMain extends Application {
 
     }
 
-    public static void changeScene(Scene pScene){
+    public static void changeScene(Scene pScene) {
         mStage.setScene(pScene);
     }
 
-    public static void exit(){
+    public static void exit() {
 
         sLog.info("exiting gracefully...");
         ExitManager.exit();

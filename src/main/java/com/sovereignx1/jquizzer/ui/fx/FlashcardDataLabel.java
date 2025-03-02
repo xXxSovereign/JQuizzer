@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
+import java.util.Objects;
+
 /**
  * This class represents the data and label of a flashcard in the flashcard list for the flashcard creator
  *
@@ -12,34 +14,44 @@ import javafx.scene.layout.HBox;
  */
 public class FlashcardDataLabel extends SelectableLabel {
 
-    private final String mFrontText;
+    private String mFrontText;
 
-    private final String mBackText;
+    private String mBackText;
+
+    // This relies on the .label.selected style class in the css file
+    private static final String SELECTED_STYLE_CLASS = "selected";
+
+    private int mFlashcardIndex;
+
+    private final Button mDeleteButton = new Button("-");
 
     /**
-     * Creates a Label to act as a flashcard selection. Accepts a callback to allows a controller
-     * to listen in on when this label is clicked
+     * Creates a Label to act as a flashcard selection. Accepts a callback to allows a controller to listen in on when
+     * this label is clicked
      *
      * @param pName Text for this label to display
      * @param pFrontText Text for the front of the flashcard
      * @param pBackText Text for the back of the flashcard
-     * @param pControllerCallback Callback for a controller class to listen for mouse events with
+     * @param pClickCallback Callback for a controller class to listen for mouse events with
      */
-    public FlashcardDataLabel(String pName, String pFrontText, String pBackText,
-                              EventHandler<? super javafx.scene.input.MouseEvent> pControllerCallback) {
-        super(pName, pControllerCallback);
+    public FlashcardDataLabel(String pName, String pFrontText, String pBackText, int pFlashcardIndex,
+                              EventHandler<? super javafx.scene.input.MouseEvent> pClickCallback,
+                              EventHandler<? super javafx.scene.input.MouseEvent> pBtnCallback) {
+        super(pName, pClickCallback);
         mFrontText = pFrontText;
         mBackText = pBackText;
-
-        Button deleteButton = new Button("-");
+        mFlashcardIndex = pFlashcardIndex;
 
         // Create a layout container (HBox in this case) to hold both the Label and Button
         HBox hbox = new HBox(10); // 10px spacing between label and button
-        hbox.getChildren().add(deleteButton);
+        hbox.getChildren().add(mDeleteButton);
         hbox.getChildren().add(this);
 
         // Set the HBox as the graphic for this custom label
         setGraphic(hbox);
+
+        mDeleteButton.setOnMouseClicked(pBtnCallback);
+        mDeleteButton.setUserData(mFlashcardIndex);
     }
 
     public String getBackText() {
@@ -48,5 +60,35 @@ public class FlashcardDataLabel extends SelectableLabel {
 
     public String getFrontText() {
         return mFrontText;
+    }
+
+    public int getFlashcardIndex() {
+        return mFlashcardIndex;
+    }
+
+    public void setFrontText(String pFrontText) {
+        mFrontText = Objects.requireNonNull(pFrontText);
+    }
+
+    public void setBackText(String pBackText) {
+        mBackText = Objects.requireNonNull(pBackText);
+    }
+
+    public void setFlashcardIndex(int pIndex) {
+        mFlashcardIndex = pIndex;
+        mDeleteButton.setUserData(mFlashcardIndex);
+    }
+
+    /**
+     * When called, this will either set the Label's text blue or white depending on if it is selected or not
+     *
+     * @param pSelected Whether to turn the label blue
+     */
+    public void setSelected(boolean pSelected) {
+        if (pSelected) {
+            getStyleClass().add(SELECTED_STYLE_CLASS);
+        } else {
+            getStyleClass().removeAll(SELECTED_STYLE_CLASS);
+        }
     }
 }

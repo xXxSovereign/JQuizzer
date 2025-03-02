@@ -2,12 +2,11 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:id="mNewDialogRoot"
       fx:controller="com.sovereignx1.jquizzer.ui.mainmenu.newquiz.NewQuizzerDialogController"
-      prefHeight="400.0" prefWidth="600.0" spacing="10" alignment="CENTER" stylesheets="@../../../JQuizzerApp.css">
+      minHeight="400.0" minWidth="600.0" spacing="10" alignment="CENTER" stylesheets="@../../../JQuizzerApp.css">
 
     <fx:define>
         <ToggleGroup fx:id="mToggleGroup"/>
@@ -15,15 +14,15 @@
 
     <Label text="Please configure some settings for the new Quiz Set"/>
 
-    <Separator visible="false" prefHeight="33" />
+    <Separator visible="false" prefHeight="33"/>
 
     <HBox alignment="CENTER">
         <Label text="Quiz Name: " styleClass="static-small-title"/>
-        <TextField fx:id="mNameField" />
+        <TextField fx:id="mNameField"/>
     </HBox>
 
-    <Separator visible="false" prefHeight="10" />
-    <Label text="Select type of Quiz" styleClass="static-small-title" />
+    <Separator visible="false" prefHeight="10"/>
+    <Label text="Select type of Quiz" styleClass="static-small-title"/>
 
     <!-- Setup radio buttons. Internal state assumes flashcards = true, and a normal quiz=false. Flash cards are like
     a "special" state. -->
