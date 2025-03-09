@@ -1,7 +1,7 @@
-package com.sovereignx1.jquizzer.ui.mainmenu.newquiz;
+package com.sovereignx1.jquizzer.ui.mainmenu.newquiz.flashcard;
 
 import com.sovereignx1.jquizzer.data.QuizModel;
-import com.sovereignx1.jquizzer.ui.fx.FlashcardDataLabel;
+import com.sovereignx1.jquizzer.ui.mainmenu.newquiz.IQuizzerCreator;
 import com.sovereignx1.jquizzer.util.logger.ILogger;
 import com.sovereignx1.jquizzer.util.logger.LoggerManager;
 import javafx.application.Platform;
@@ -23,8 +23,6 @@ public class FlashcardCreatorController implements IQuizzerCreator {
     private static final ILogger sLog = LoggerManager.getLogger();
 
     @FXML
-    private VBox mRoot;
-    @FXML
     private Label mFlashcardTitle;
     @FXML
     private ScrollPane mFlashcardScrollPane;
@@ -35,19 +33,23 @@ public class FlashcardCreatorController implements IQuizzerCreator {
     @FXML
     private TextArea mBackTextArea;
     @FXML
-    private Button mSaveBtn;
-    @FXML
     private Button mSubmitBtn;
 
     private QuizModel.QuizModelBuilder mQuizBldr;
 
     private String mFlashcardTitleText;
 
-    private final ObservableList<FlashcardDataLabel> mFlashcardDataLabels = FXCollections.observableArrayList();
+    private final ObservableList<FlashcardDataLabel> mFlashcardDataLabels =
+            FXCollections.observableArrayList();
 
     private FlashcardDataLabel mSelectedFlashcard;
 
     private int mFlashcardCounter = 0;
+
+    // This allows us to know if we just deleted the selected flashcard, and allows us to select
+    // the same (really new) flashcard. If we didn't use this, and you delete card 3, then try to
+    // select the new card 3, it wouldn't work.
+    private boolean mDeleteSelectedFlag = false;
 
     @FXML
     public void initialize() {
@@ -55,27 +57,23 @@ public class FlashcardCreatorController implements IQuizzerCreator {
 
         mFlashcardScrollPane.setContent(mFlashcardScrollPaneContents);
 
-        // Initially disable add and submit, then unlock when the second text field changes.
-        // Poor mans check of if both boxes have text. Will double-check later too
-        mSaveBtn.setDisable(true);
+        // Initially disable submit, unlock when the save button is clicked
         mSubmitBtn.setDisable(true);
 
-        mBackTextArea.textProperty().addListener(pUnused -> {
-            mSaveBtn.setDisable(false);
-        });
-
         // Setup listener to update the scroll pane when new flash cards are added
-        mFlashcardDataLabels.addListener((ListChangeListener<? super FlashcardDataLabel>) pChange -> {
-            // Have to get next change
-            if (pChange.next()) {
-                mFlashcardScrollPaneContents.getChildren().addAll(pChange.getAddedSubList());
-                mFlashcardScrollPaneContents.getChildren().removeAll(pChange.getRemoved());
+        mFlashcardDataLabels.addListener(
+                (ListChangeListener<? super FlashcardDataLabel>) pChange -> {
+                    // Have to get next change
+                    if (pChange.next()) {
+                        mFlashcardScrollPaneContents.getChildren()
+                                .addAll(pChange.getAddedSubList());
+                        mFlashcardScrollPaneContents.getChildren().removeAll(pChange.getRemoved());
 
+                        // If all flashcards are deleted, disable submit
+                        mSubmitBtn.setDisable(mFlashcardDataLabels.isEmpty());
 
-                mSubmitBtn.setDisable(mFlashcardDataLabels.isEmpty());
-
-            }
-        });
+                    }
+                });
 
         // Construct default flash card, and manually trigger all selection logic to populate gui
         FlashcardDataLabel defaultFlashcard = getNewFlashcard();
@@ -87,14 +85,15 @@ public class FlashcardCreatorController implements IQuizzerCreator {
     }
 
     /**
-     * This method is called by NewQuizzerDialogController immediately after this class is constructed. This allows this
-     * class to get the starter quiz information, and to add the flashcards to once finished creating.
+     * This method is called by NewQuizzerDialogController immediately after this class is
+     * constructed. This allows this class to get the starter quiz information, and to add the
+     * flashcards to once finished creating.
      *
      * @param pBuilder QuizModelBuilder to add completed flashcards to
      */
     @Override
     public void setBuilder(QuizModel.QuizModelBuilder pBuilder) {
-        sLog.info("setBuilder for Flashcard");
+        sLog.info("setting quiz model builder");
         mQuizBldr = Objects.requireNonNull(pBuilder);
         mFlashcardTitleText = "Flashcard set: " + mQuizBldr.mName;
 
@@ -105,6 +104,7 @@ public class FlashcardCreatorController implements IQuizzerCreator {
     public void onNew() {
         FlashcardDataLabel newFlashcard = getNewFlashcard();
 
+        sLog.info("Created new flashcard");
         saveFromText();
 
         mSelectedFlashcard.setSelected(false);
@@ -117,7 +117,9 @@ public class FlashcardCreatorController implements IQuizzerCreator {
 
     @FXML
     public void onSubmit() {
-        // TODO: implement
+        sLog.info("Starting submission process. Saving flashcards and changing the scene...");
+        // TODO: implement. This should call a method present in the NewQuizController, or it could
+        // take control of the scene and clear this window itself. not sure which is better yet. :/
     }
 
     // Callback and utility Methods ==================
@@ -126,8 +128,11 @@ public class FlashcardCreatorController implements IQuizzerCreator {
         // This is always bound on a FlashcardDataLabel, so this is safe
         FlashcardDataLabel newFlashcard = (FlashcardDataLabel) (pEvent.getSource());
 
-        // If new flashcard is different than current
-        if (!(newFlashcard.getFlashcardIndex() == mSelectedFlashcard.getFlashcardIndex())) {
+        // If new flashcard is different than current. mDeleteSelectedFlag allows us to select a
+        // card that took the
+        // place of the selected card if we deleted the selected card
+        if (!(newFlashcard.getFlashcardIndex() == mSelectedFlashcard.getFlashcardIndex()) ||
+            mDeleteSelectedFlag) {
             // save current flashcard
             saveFromText();
             // Unselect old
@@ -146,17 +151,25 @@ public class FlashcardCreatorController implements IQuizzerCreator {
         // Delete buttons are initialized to have the flashcard index stored in them
         int index = (int) btn.getUserData();
 
+        // Increment since flashcards are 1 based
+        sLog.info(
+                "User Deleting Flashcard " + (index + 1) + ": " + mFlashcardDataLabels.get(index));
+
         // If we delete the current one, clear the text fields
         if (index == mSelectedFlashcard.getFlashcardIndex()) {
+            mDeleteSelectedFlag = true;
             Platform.runLater(() -> {
                 mFrontTextArea.setText("");
                 mBackTextArea.setText("");
             });
         }
 
+        // Discard deleted flashcard
         mFlashcardDataLabels.remove(index);
 
-        // rename all flash cards to avoid jumps in naming
+        // rename all flash cards to avoid jumps in naming, and correct their index variables. We
+        // do this since the
+        // List auto sizes itself, but the flashcards don't update themselves
         for (int i = 0; i < mFlashcardDataLabels.size(); i++) {
             mFlashcardDataLabels.get(i).setName("Flashcard " + (i + 1));
             mFlashcardDataLabels.get(i).setFlashcardIndex(i);
@@ -172,15 +185,35 @@ public class FlashcardCreatorController implements IQuizzerCreator {
     }
 
     private FlashcardDataLabel getNewFlashcard() {
-        // Increment counter, and offset by 1 for name (there is no flashcard 0)
-        return new FlashcardDataLabel("Flashcard " + (mFlashcardCounter + 1), "Sample Front Text", "Sample Back Text",
-                                      mFlashcardCounter++,
+        // Offset counter by 1 for name (there is no flashcard 0)
+        return new FlashcardDataLabel("Flashcard " + (mFlashcardCounter + 1),
+                                      mFlashcardCounter++, // then increment
                                       this::onFlashcardSelect, this::onFlashcardDelete);
     }
 
-    // This method can be called either from the save button or internal logic. This is primarily for utility needs.
+    /**
+     * This method can be called either from the save button or internal logic. This is primarily
+     * for utility needs.
+     * <p>
+     * Saves the current text in each text area to the currently selected flashcard.
+     */
     @FXML
     private void saveFromText() {
+
+        // If were empty, and either of the text areas are empty, do nothing.
+        // If both text areas have text, create a new flashcard and set it selected
+        if (mFlashcardDataLabels.isEmpty()) {
+            if (mFrontTextArea.getText().isEmpty() || mBackTextArea.getText().isEmpty()) {
+                return;
+            } else {
+                FlashcardDataLabel newCard = getNewFlashcard();
+                newCard.setFrontText(mFrontTextArea.getText());
+                newCard.setBackText(mBackTextArea.getText());
+                mSelectedFlashcard = newCard;
+                mSelectedFlashcard.setSelected(true);
+                mFlashcardDataLabels.add(mSelectedFlashcard);
+            }
+        }
         String front, back;
 
         front = mFrontTextArea.getText();

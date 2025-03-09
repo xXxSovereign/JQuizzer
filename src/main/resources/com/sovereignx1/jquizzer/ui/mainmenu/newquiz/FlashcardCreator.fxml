@@ -6,7 +6,7 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:id="mRoot"
-      fx:controller="com.sovereignx1.jquizzer.ui.mainmenu.newquiz.FlashcardCreatorController"
+      fx:controller="com.sovereignx1.jquizzer.ui.mainmenu.newquiz.flashcard.FlashcardCreatorController"
       minHeight="400.0" minWidth="600.0" maxHeight="Infinity" maxWidth="Infinity" alignment="TOP_CENTER">
 
     <padding>

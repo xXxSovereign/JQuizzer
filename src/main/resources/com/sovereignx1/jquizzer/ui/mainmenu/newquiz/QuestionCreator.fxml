@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <!--
 This form encapsulates the format for the New Quizzer Dialog's question creation functionality.
 This form will provide a way to set up Quizzer questions. There is a sibling fxml file to this one
 that handles creating flashcard questions.
 -->
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:id="mRoot"
-      fx:controller="com.sovereignx1.jquizzer.ui.mainmenu.newquiz.QuestionCreatorController"
+      fx:controller="com.sovereignx1.jquizzer.ui.mainmenu.newquiz.question.QuestionCreatorController"
       prefHeight="400.0" prefWidth="600.0" alignment="CENTER">
 
-    <Label text="TESTTTTTTTT" />
-    <Button text="testLol" />
+    <Label text="TESTTTTTTTT"/>
+    <Button text="testLol"/>
 </VBox>

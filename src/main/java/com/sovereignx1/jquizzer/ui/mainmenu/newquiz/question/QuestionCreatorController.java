@@ -1,12 +1,13 @@
-package com.sovereignx1.jquizzer.ui.mainmenu.newquiz;
+package com.sovereignx1.jquizzer.ui.mainmenu.newquiz.question;
 
 import com.sovereignx1.jquizzer.data.QuizModel;
+import com.sovereignx1.jquizzer.ui.mainmenu.newquiz.IQuizzerCreator;
 import com.sovereignx1.jquizzer.util.logger.ILogger;
 import com.sovereignx1.jquizzer.util.logger.LoggerManager;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 
-public class QuestionCreatorController implements IQuizzerCreator{
+public class QuestionCreatorController implements IQuizzerCreator {
 
     private static final ILogger sLog = LoggerManager.getLogger();
 
@@ -14,7 +15,7 @@ public class QuestionCreatorController implements IQuizzerCreator{
     private VBox mRoot;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
 
     }
 
