@@ -1,19 +1,17 @@
 package com.sovereignx1.jquizzer.data.prompt.quizprompt;
 
-import com.sovereignx1.jquizzer.data.prompt.IQuizPrompt;
-import javafx.scene.Node;
+import com.sovereignx1.jquizzer.data.prompt.IQuizzerPrompt;
 
-public class QuizPrompt implements IQuizPrompt {
-
-    // This represents the question to prompt the user with
-    private String mQuestion;
-
-    private AnswerSet mAnswerSet;
-
-    public QuizPrompt(String question, AnswerSet answerSet) {}
+public class QuizPrompt implements IQuizzerPrompt {
 
     @Override
-    public Node getRootNode() {
-        return null;
+    public String getContent() {
+        return "";
+    }
+
+    @Override
+    public void doAction(int pData) {
+        // need to check pData to the correct answer, as pData will contain user answer
+
     }
 }

@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.sovereignx1.jquizzer.ui.quizzer.QuizzerController"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.sovereignx1.jquizzer.ui.quizzer.QuizzerController"
       fx:id="mQuizzerRoot"
-            prefHeight="400.0" prefWidth="600.0" alignment="TOP_CENTER" stylesheets="@../../JQuizzerApp.css">
+      minHeight="400.0" minWidth="600.0" spacing="10" alignment="TOP_CENTER" stylesheets="@../../JQuizzerApp.css">
 
-    <Label text="quiz shit" />
-    <Label text="This is where we will do flash cards or quiz based off of what was loaded or specified" />
+    <Label fx:id="mTitleLabel" styleClass="small-title"/>
 
-    <Separator visible="false" />
+    <Separator/>
 
-    <ScrollPane fx:id="mTestPane" prefHeight="${mQuizzerRoot.height}" >
-        <VBox fx:id="mHistory"  prefWidth="${mTestPane.width}" />
-    </ScrollPane>
+    <!-- Add some spacing -->
+    <Region VBox.vgrow="ALWAYS"/>
 
+    <!-- Content section to show flashcard/quiz -->
+    <HBox styleClass="border-box" alignment="CENTER">
+        <VBox alignment="CENTER">
+            <padding>
+                <Insets top="10" left="10" right="10" bottom="10"/>
+            </padding>
+            <Label fx:id="mContentLabel" VBox.vgrow="ALWAYS" styleClass="content-label"/>
+        </VBox>
+    </HBox>
+    <!-- Add some spacing -->
+    <Region VBox.vgrow="ALWAYS"/>
+
+    <Separator/>
+
+    <!-- Button controls at the bottom of the viewport -->
+    <HBox spacing="10">
+        <Button text="◀" onAction="#onBack"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <!-- This box is populated in the controller class, and will contain different controls
+         for Quiz vs Flashcard (Flip vs Multiple Choice Answer -->
+        <HBox fx:id="mQuizzerActionsBox" spacing="5"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="▶" onAction="#onNext"/>
+    </HBox>
+    
 </VBox>

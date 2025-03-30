@@ -38,7 +38,7 @@
                     <HBox alignment="CENTER_LEFT" maxWidth="Infinity">
                         <Label text="Front Text"/>
                         <Region HBox.hgrow="ALWAYS"/>
-                        <Label text="Flashcard List"/>
+                        <Label text="Flashcard List:"/>
                     </HBox>
                     <TextArea fx:id="mFrontTextArea" wrapText="true" prefRowCount="100" maxHeight="Infinity"/>
                 </VBox>

@@ -62,7 +62,7 @@ public class ApplicationContext {
      * @param <T> Application Model Class
      * <p>
      * This method suppresses unchecked warning, as the object will always be of the type
-     * mAppCtxClass. This is due to how mAppCtxObj is instantiated above in initialize()
+     * mAppCtxClass. This is due to how mAppCtxObj is instantiated above in #initialize()
      * @return An object of the App Context Model
      */
     @SuppressWarnings("unchecked")

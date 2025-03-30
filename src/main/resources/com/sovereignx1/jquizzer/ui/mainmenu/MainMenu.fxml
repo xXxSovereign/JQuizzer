@@ -1,7 +1,5 @@
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Separator?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.sovereignx1.jquizzer.ui.mainmenu.MainMenuController"
@@ -11,18 +9,19 @@
 
     <VBox alignment="CENTER" spacing="1">
         <Label fx:id="mTitleLbl" styleClass="title" text="J Q U I Z Z E R"/>
-        <Label text="        by Michael Adolph" styleClass="small-title"/>
+        <Label text="        by Michael A." styleClass="small-title"/>
     </VBox>
 
 
-    <Separator visible="false" prefHeight="100" />
+    <Separator visible="false" prefHeight="100"/>
     <Label text="Select an option"/>
 
-    <Separator visible="false" prefHeight="33" />
+    <Separator visible="false" prefHeight="33"/>
 
     <Button text="New" onAction="#newDialog" styleClass="largeButton"/>
-    <Button text="Load" onAction="#loadDialog" styleClass="largeButton"/>
-    <Button text="Options" onAction="#optionDialog" styleClass="largeButton"/>
+    <Button text="Load" onAction="#loadDialog" styleClass="largeButton" disable="true"/>
+
+    <Button text="Options" onAction="#optionDialog" styleClass="largeButton" disable="true"/>
     <Button text="Exit" onAction="#exitDialog" styleClass="largeButton"/>
 
 </VBox>

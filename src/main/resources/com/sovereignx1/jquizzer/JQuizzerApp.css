@@ -9,6 +9,14 @@
     -fx-font-size: 18px;
 }
 
+.border-box {
+    -fx-border-color: #116fad; /* Blue border */
+    -fx-border-width: 2px; /* Border thickness */
+    -fx-border-style: solid; /* Solid border */
+    -fx-border-radius: 5px; /* Optional: Rounded corners */
+    -fx-padding: 5px; /* Optional: Adds spacing inside the border */
+}
+
 /* Generic error class for showing a red border */
 .error {
     -fx-border-color: red;
@@ -131,6 +139,16 @@
     -fx-padding: 5 10; /* Padding around the text */
     -fx-cursor: default; /* No hand cursor (since it's not interactive) */
     -fx-effect: null; /* Remove any shadow or other effects */
+}
+
+.label.content-label {
+    -fx-text-fill: #1a84cc; /* White text */
+    -fx-font-size: 24px; /* Slightly larger font size */
+    -fx-font-weight: bold; /* Bold font */
+    -fx-padding: 5 0; /* Less padding */
+    -fx-background-color: transparent; /* No background */
+    -fx-text-alignment: center; /* Center align text */
+    -fx-cursor: default; /* Non-clickable cursor */
 }
 
 /* RadioButton styles */

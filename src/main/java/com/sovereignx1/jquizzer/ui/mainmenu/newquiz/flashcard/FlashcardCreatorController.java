@@ -1,7 +1,9 @@
 package com.sovereignx1.jquizzer.ui.mainmenu.newquiz.flashcard;
 
 import com.sovereignx1.jquizzer.data.QuizModel;
+import com.sovereignx1.jquizzer.data.prompt.FlashPrompt;
 import com.sovereignx1.jquizzer.ui.mainmenu.newquiz.IQuizzerCreator;
+import com.sovereignx1.jquizzer.ui.mainmenu.newquiz.NewQuizzerDialogController;
 import com.sovereignx1.jquizzer.util.logger.ILogger;
 import com.sovereignx1.jquizzer.util.logger.LoggerManager;
 import javafx.application.Platform;
@@ -15,6 +17,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.Objects;
 
@@ -22,6 +25,8 @@ public class FlashcardCreatorController implements IQuizzerCreator {
 
     private static final ILogger sLog = LoggerManager.getLogger();
 
+    @FXML
+    private VBox mRoot;
     @FXML
     private Label mFlashcardTitle;
     @FXML
@@ -68,10 +73,8 @@ public class FlashcardCreatorController implements IQuizzerCreator {
                         mFlashcardScrollPaneContents.getChildren()
                                 .addAll(pChange.getAddedSubList());
                         mFlashcardScrollPaneContents.getChildren().removeAll(pChange.getRemoved());
-
                         // If all flashcards are deleted, disable submit
                         mSubmitBtn.setDisable(mFlashcardDataLabels.isEmpty());
-
                     }
                 });
 
@@ -95,7 +98,7 @@ public class FlashcardCreatorController implements IQuizzerCreator {
     public void setBuilder(QuizModel.QuizModelBuilder pBuilder) {
         sLog.info("setting quiz model builder");
         mQuizBldr = Objects.requireNonNull(pBuilder);
-        mFlashcardTitleText = "Flashcard set: " + mQuizBldr.mName;
+        mFlashcardTitleText = "New Flashcard Quizzer: " + mQuizBldr.mName;
 
         Platform.runLater(() -> mFlashcardTitle.setText(mFlashcardTitleText));
     }
@@ -118,8 +121,17 @@ public class FlashcardCreatorController implements IQuizzerCreator {
     @FXML
     public void onSubmit() {
         sLog.info("Starting submission process. Saving flashcards and changing the scene...");
-        // TODO: implement. This should call a method present in the NewQuizController, or it could
-        // take control of the scene and clear this window itself. not sure which is better yet. :/
+
+        for (FlashcardDataLabel flashcard : mFlashcardDataLabels) {
+            FlashPrompt toAdd = new FlashPrompt(flashcard.getFrontText(), flashcard.getBackText());
+            mQuizBldr.addPrompt(toAdd);
+        }
+
+        // Submit quizzer with all flashcards
+        NewQuizzerDialogController.submitQuizzerPrompts(mQuizBldr.build());
+
+        // Close the window
+        ((Stage) mRoot.getScene().getWindow()).close();
     }
 
     // Callback and utility Methods ==================
@@ -128,9 +140,10 @@ public class FlashcardCreatorController implements IQuizzerCreator {
         // This is always bound on a FlashcardDataLabel, so this is safe
         FlashcardDataLabel newFlashcard = (FlashcardDataLabel) (pEvent.getSource());
 
-        // If new flashcard is different than current. mDeleteSelectedFlag allows us to select a
-        // card that took the
-        // place of the selected card if we deleted the selected card
+        // If new flashcard is different from current, mDeleteSelectedFlag allows us to select a
+        // card that took the place of the selected card if we deleted the selected card
+        // I.e. without this, if we delete flashcard 3, we would not be able to select 3 again
+        // right away
         if (!(newFlashcard.getFlashcardIndex() == mSelectedFlashcard.getFlashcardIndex()) ||
             mDeleteSelectedFlag) {
             // save current flashcard

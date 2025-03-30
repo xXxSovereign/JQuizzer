@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.layout.VBox?>
 <VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.sovereignx1.jquizzer.JQuizzerAppController"
-            fx:id="mRoot"
-            prefHeight="600" prefWidth="400" alignment="CENTER" stylesheets="@JQuizzerApp.css">
+      xmlns:fx="http://javafx.com/fxml"
+      fx:id="mRoot"
+      minHeight="600" minWidth="400" alignment="CENTER" stylesheets="@JQuizzerApp.css">
 
-    <fx:include source="ui/mainmenu/MainMenu.fxml" />
+    <!-- This file is simply the main fxml, no controller class is needed as MainMenu.fxml takes care of it -->
+    <fx:include source="ui/mainmenu/MainMenu.fxml"/>
 
 </VBox>

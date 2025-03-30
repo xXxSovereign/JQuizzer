@@ -12,12 +12,12 @@
         <ToggleGroup fx:id="mToggleGroup"/>
     </fx:define>
 
-    <Label text="Please configure some settings for the new Quiz Set"/>
+    <Label text="Please configure some settings for the new Quizzer"/>
 
     <Separator visible="false" prefHeight="33"/>
 
     <HBox alignment="CENTER">
-        <Label text="Quiz Name: " styleClass="static-small-title"/>
+        <Label text="Quizzer Name: " styleClass="static-small-title"/>
         <TextField fx:id="mNameField"/>
     </HBox>
 
@@ -32,7 +32,7 @@
         </HBox>
 
         <HBox spacing="1">
-            <RadioButton text="Quizzer" toggleGroup="$mToggleGroup" userData="false"/>
+            <RadioButton text="Quizzer" toggleGroup="$mToggleGroup" userData="false" disable="true"/>
         </HBox>
     </HBox>
 

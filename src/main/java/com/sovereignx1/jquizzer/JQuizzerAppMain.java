@@ -2,6 +2,7 @@ package com.sovereignx1.jquizzer;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.sovereignx1.jquizzer.services.AppStateSvc;
 import com.sovereignx1.jquizzer.util.ExitManager;
 import com.sovereignx1.jquizzer.util.appctx.ApplicationContext;
 import com.sovereignx1.jquizzer.util.logger.ILogger;
@@ -15,18 +16,19 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.util.Objects;
-
 /**
  * Main application class for JQuizzer
  * <p>
- * This class handles setting up the JavaFX environment and FXMLLoader. Additionally, this class will start all
- * services
+ * This class handles setting up the JavaFX environment and FXMLLoader. Additionally, this class
+ * will start all services
  */
 public class JQuizzerAppMain extends Application {
 
     private static final ILogger sLog;
     public static Stage mStage;
+
+    private static final int WINDOW_MIN_HEIGHT = 600;
+    private static final int WINDOW_MIN_WIDTH = 400;
 
     static {
         ApplicationContext.initialize(JQuizzerAppCtx.class, "JQuizzerAppCtx.json");
@@ -56,10 +58,14 @@ public class JQuizzerAppMain extends Application {
 
             mStage.setScene(scene);
 
-            // Im not a good enough dev yet to allow this
-            // once im good with layout managers frfr ong no cap this can be unlocked
-            mStage.setResizable(false);
+            primaryStage.setMinWidth(WINDOW_MIN_WIDTH);
+            primaryStage.setMinHeight(WINDOW_MIN_HEIGHT);
+
+
             mStage.show();
+
+            // Give stage to AppStateSvc to handle changing main window to quizzer view
+            AppStateSvc.setStage(mStage);
 
             // Clean all threads on exit
             mStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -75,23 +81,6 @@ public class JQuizzerAppMain extends Application {
         } catch (Exception e) {
             sLog.error("Error encountered in initializing JQuizzer: ", e);
         }
-    }
-
-    // Utility Methods
-
-    public static void changeScene(String fxml) {
-        try {
-            Parent pane = FXMLLoader.load(Objects.requireNonNull(JQuizzerAppMain.class.getResource(fxml)));
-            mStage.getScene().setRoot(pane);
-        } catch (Exception e) {
-            sLog.error("OOPS CHANGING SCENE MESS UP !!! " + e);
-        }
-
-
-    }
-
-    public static void changeScene(Scene pScene) {
-        mStage.setScene(pScene);
     }
 
     public static void exit() {

@@ -44,7 +44,9 @@ public class MainMenuController {
                     mTitleLbl.pseudoClassStateChanged(PseudoClass.getPseudoClass("hover"), false);
                 }
             } catch (InterruptedException e) {
-                mLog.debug("MainMenuTitleBlinker has been interrupted, usually due to application exit");
+                mLog.debug(
+                        "MainMenuTitleBlinker has been interrupted, usually due to application " +
+                        "exit");
             }
         });
 
@@ -66,7 +68,8 @@ public class MainMenuController {
 
             // Create the popup stage
             Stage popupStage = new Stage();
-            popupStage.initModality(Modality.APPLICATION_MODAL); // Block interaction with other windows
+            popupStage.initModality(
+                    Modality.APPLICATION_MODAL); // Block interaction with other windows
             popupStage.setTitle("New Quizzer Dialog");
 
             Scene popupScene = new Scene(popupRoot);
@@ -97,14 +100,15 @@ public class MainMenuController {
     private void exitDialog() {
         mLog.info("executing exit dialog");
 
-        // TODO: Overhaul this gay ass exit dialog with a custom FXML that does the same stuff. should be ez
-        // Related to above, maybe make a cool generic Alert/Confirmation Dialog factory, might be useful tbh
+        // TODO: Overhaul this exit dialog with a custom FXML that does the same stuff. should be ez
+        // Related to above, maybe make a cool generic Alert/Confirmation Dialog factory, might
+        // be useful tbh
 
         // Build small alert popup, and if confirmed exit application
         Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION);
         exitAlert.setTitle("Exit Confirmation");
         exitAlert.setHeaderText(null);
-        exitAlert.setContentText("Do you really need to exit ?");
+        exitAlert.setContentText("Do you really want to exit ?");
 
 
         ButtonType yesBtn = new ButtonType("Yes", ButtonBar.ButtonData.YES);
