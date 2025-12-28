@@ -140,8 +140,8 @@ public class FlashcardCreatorController implements IQuizzerCreator {
         // This is always bound on a FlashcardDataLabel, so this is safe
         FlashcardDataLabel newFlashcard = (FlashcardDataLabel) (pEvent.getSource());
 
-        // If new flashcard is different from current, mDeleteSelectedFlag allows us to select a
-        // card that took the place of the selected card if we deleted the selected card
+        // If new flashcard is different from current card that took the place of the unselected, mDeleteSelectedFlag allows us to select a
+        // card if we deleted the selected card
         // I.e. without this, if we delete flashcard 3, we would not be able to select 3 again
         // right away
         if (!(newFlashcard.getFlashcardIndex() == mSelectedFlashcard.getFlashcardIndex()) ||

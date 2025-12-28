@@ -88,5 +88,6 @@ public class JQuizzerAppMain extends Application {
         sLog.info("exiting gracefully...");
         ExitManager.exit();
         Platform.exit();
+        System.exit(0);
     }
 }

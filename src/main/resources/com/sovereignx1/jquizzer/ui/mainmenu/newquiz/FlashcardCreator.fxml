@@ -61,7 +61,6 @@
 
     <HBox VBox.vgrow="NEVER" alignment="CENTER" spacing="10">
         <Button text="New" onAction="#onNew"/>
-        <Button fx:id="mSaveBtn" text="Save" onAction="#saveFromText"/>
         <Button fx:id="mSubmitBtn" text="Submit" onAction="#onSubmit"/>
     </HBox>
 

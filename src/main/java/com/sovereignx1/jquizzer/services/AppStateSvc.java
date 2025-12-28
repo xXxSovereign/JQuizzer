@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 /**
- * This class represents a service which holds information about the current state of the quizzer
+ * This class represents a service which holds global information about the current state of the quizzer
  */
 public class AppStateSvc {
 
