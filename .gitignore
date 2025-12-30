@@ -5,6 +5,7 @@ build/
 !**/src/test/**/build/
 
 prod/*
+prodTest/*
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

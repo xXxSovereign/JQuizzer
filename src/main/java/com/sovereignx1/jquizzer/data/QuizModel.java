@@ -30,6 +30,9 @@ public class QuizModel {
         // True if Flash card set, false if traditional quiz
         public boolean mIsFlashcards = false;
 
+        /**
+         * List of "questions." Questions can either be flashcard sets or actual quiz questions
+         */
         public List<IQuizzerPrompt> mQuestionList = new ArrayList<>();
 
         public QuizModelBuilder withName(String pName) {
