@@ -22,7 +22,10 @@
             <padding>
                 <Insets top="10" left="10" right="10" bottom="10"/>
             </padding>
-            <Label fx:id="mContentLabel" VBox.vgrow="ALWAYS" styleClass="content-label"/>
+            <VBox fx:id="mContentBox">
+                <Label fx:id="mContentLabel" VBox.vgrow="ALWAYS" styleClass="content-label"/>
+
+            </VBox>
         </VBox>
     </HBox>
     <!-- Add some spacing -->

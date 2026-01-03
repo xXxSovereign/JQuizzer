@@ -28,7 +28,9 @@ public class FlashPrompt implements IQuizzerPrompt {
     }
 
     @Override
-    public void doAction(int pUnused) {
+    public boolean doAction(int pUnused) {
         mFrontFocused = !mFrontFocused;
+        // Hardcoded return false as the return val is not needed for flashcards, used for correctness on quizzes
+        return false;
     }
 }

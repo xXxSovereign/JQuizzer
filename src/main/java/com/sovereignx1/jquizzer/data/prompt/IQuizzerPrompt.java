@@ -14,7 +14,8 @@ public interface IQuizzerPrompt {
      * This will flip a flashcard, or check an answer for quizzes.
      *
      * @param pData Data to pass to the action method, will be unused for flashcards, but will be a
-     * user entered answer index for quizzes
+     *              user entered answer index for quizzes
+     * @return If given answer was correct for quizzes, hardcoded false for flashcards (no implementation needed)
      */
-    void doAction(int pData);
+    boolean doAction(int pData);
 }

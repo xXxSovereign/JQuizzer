@@ -91,8 +91,11 @@ public class MainMenuController {
     }
 
     @FXML
-    private void optionDialog() {
-        mLog.info("executing options");
+    private void settingsDialog() {
+        mLog.info("executing settings dialog");
+
+        // TODO: Implement settings dialog
+        // this will encompass settings like whether or not to randomize prompts
 
     }
 

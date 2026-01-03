@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.List;
+
 /**
  * This class handles managing the Quizzer environment. I.e. handling if we are doing flash cards vs
  * quiz and other stuff
@@ -20,13 +22,16 @@ public class QuizzerController {
     private final ILogger mLog = LoggerManager.getLogger();
 
     @FXML
-    public VBox mQuizzerRoot;
+    private VBox mQuizzerRoot;
     @FXML
-    public Label mTitleLabel;
+    private Label mTitleLabel;
+    // Label inside content box, used for flashcard text and main question text on quizzers
     @FXML
-    public Label mContentLabel;
+    private Label mContentLabel;
     @FXML
-    public HBox mQuizzerActionsBox;
+    private VBox mContentBox;
+    @FXML
+    private HBox mQuizzerActionsBox;
 
     private QuizModel mQuizModel;
 
@@ -39,15 +44,18 @@ public class QuizzerController {
         // Load current quiz from AppState, then populate the view from the model
         mQuizModel = AppStateSvc.getLoadedQuiz();
 
+        List<IQuizzerPrompt> quizModelPrompts = mQuizModel.getPromptList();
+
         if (mQuizModel.isFlashcards()) {
             // configure as flashcards
 
             mTitleLabel.setText("Flashcard Set: " + mQuizModel.getName());
 
             // Populate with first Flashcard's content
-            mContentLabel.setText(mQuizModel.getPromptList().get(selectedPromptIndex).getContent());
+            mContentLabel.setText(quizModelPrompts.get(selectedPromptIndex).getContent());
 
             Button flashcardFlipBtn = new Button("Flip");
+            // User data is unneeded for flashcards, it is used for quizzes and the correct answer
             flashcardFlipBtn.setUserData(-1);
             flashcardFlipBtn.setOnAction(this::handleAction);
 
@@ -56,6 +64,7 @@ public class QuizzerController {
         } else {
             // configure as quiz
             // do nothing for now
+
         }
     }
 
@@ -68,6 +77,7 @@ public class QuizzerController {
         // We manually create these buttons, and int will only ever be put in.
         // Currently, user data is only ever set to -1, but when I add quiz support in this will
         // just work.
+
 
         int btnData = (int) ((Button) pActionEvent.getSource()).getUserData();
         getCurrentQuizPrompt().doAction(btnData);

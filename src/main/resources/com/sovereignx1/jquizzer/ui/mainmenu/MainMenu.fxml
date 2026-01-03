@@ -9,7 +9,7 @@
 
     <VBox alignment="CENTER" spacing="1">
         <Label fx:id="mTitleLbl" styleClass="title" text="J Q U I Z Z E R"/>
-        <Label text="        by Michael A." styleClass="small-title"/>
+        <Label text="       Developed by Michael A." styleClass="small-title"/>
     </VBox>
 
 
@@ -21,7 +21,7 @@
     <Button text="New" onAction="#newDialog" styleClass="largeButton"/>
     <Button text="Load" onAction="#loadDialog" styleClass="largeButton" disable="true"/>
 
-    <Button text="Options" onAction="#optionDialog" styleClass="largeButton" disable="true"/>
+    <Button text="Settings" onAction="#settingsDialog" styleClass="largeButton" disable="true"/>
     <Button text="Exit" onAction="#exitDialog" styleClass="largeButton"/>
 
 </VBox>
